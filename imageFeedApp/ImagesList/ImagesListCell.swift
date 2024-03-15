@@ -13,11 +13,9 @@ final class ImagesListCell: UITableViewCell { // класс для хранен�
     
     // MARK: - Lifecycle
     
-
-    @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var likeButton: UIButton!
     @IBOutlet var cellImage: UIImageView!
-    
+    @IBOutlet var likeButton: UIButton!
+    @IBOutlet var dateLabel: UILabel!
     
     // MARK: - Properties
     

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D906FE942BA0CB64007A8C5A /* ImageListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D906FE932BA0CB64007A8C5A /* ImageListView.xib */; };
 		D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914044D2B9F15CB006C49AF /* ImagesListCell.swift */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
@@ -19,7 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D906FE932BA0CB64007A8C5A /* ImageListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListView.xib; sourceTree = "<group>"; };
 		D914044D2B9F15CB006C49AF /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		D989999E2B91C5750081341A /* imageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98999A12B91C5750081341A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +46,6 @@
 			children = (
 				D914044D2B9F15CB006C49AF /* ImagesListCell.swift */,
 				D98999A52B91C5750081341A /* ImageListViewController.swift */,
-				D906FE932BA0CB64007A8C5A /* ImageListView.xib */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -142,7 +139,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D906FE942BA0CB64007A8C5A /* ImageListView.xib in Resources */,
 				D98999B12B91C5780081341A /* LaunchScreen.storyboard in Resources */,
 				D98999AE2B91C5780081341A /* Assets.xcassets in Resources */,
 				D98999A92B91C5750081341A /* Main.storyboard in Resources */,

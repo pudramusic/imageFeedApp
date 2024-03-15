@@ -21,27 +21,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" name="YP Black"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Images List Cell" rowHeight="344" id="Clk-Ql-KcD" customClass="ImagesListCell" customModule="imageFeedApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="344" id="Clk-Ql-KcD" customClass="ImagesListCell" customModule="imageFeedApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="344"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Clk-Ql-KcD" id="jUk-cg-ayf">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="344"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLY-G2-qVC" userLabel="Like Button">
-                                                    <rect key="frame" x="311" y="4" width="66" height="56"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="Active"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAO-CT-wAg" userLabel="CellImage">
+                                                    <rect key="frame" x="76" y="108" width="240" height="128"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLY-G2-qVC" userLabel="LikeButton">
+                                                    <rect key="frame" x="335" y="4" width="42" height="42"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="active"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 марта 2023" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0t-NV-3aM" userLabel="Date Label">
-                                                    <rect key="frame" x="8" y="327.66666666666669" width="115" height="20.333333333333314"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0t-NV-3aM" userLabel="DateLabel">
+                                                    <rect key="frame" x="24" y="332" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAO-CT-wAg" userLabel="Image Cell">
-                                                    <rect key="frame" x="76" y="108" width="240" height="128"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" name="YP Background"/>
                                             <constraints>
@@ -51,16 +57,16 @@
                                                 <constraint firstItem="tLY-G2-qVC" firstAttribute="top" secondItem="lAO-CT-wAg" secondAttribute="top" id="FJH-Bh-Xfc"/>
                                                 <constraint firstItem="lAO-CT-wAg" firstAttribute="top" secondItem="jUk-cg-ayf" secondAttribute="top" constant="4" id="J2z-ze-f6d"/>
                                                 <constraint firstItem="lAO-CT-wAg" firstAttribute="leading" secondItem="jUk-cg-ayf" secondAttribute="leading" constant="16" id="TMQ-xC-drg"/>
-                                                <constraint firstItem="lAO-CT-wAg" firstAttribute="leading" secondItem="E0t-NV-3aM" secondAttribute="leading" constant="8" id="gx9-4P-Qpb"/>
+                                                <constraint firstItem="E0t-NV-3aM" firstAttribute="leading" secondItem="lAO-CT-wAg" secondAttribute="leading" constant="8" id="gx9-4P-Qpb"/>
                                                 <constraint firstAttribute="bottom" secondItem="lAO-CT-wAg" secondAttribute="bottom" constant="4" id="iJh-q6-pMr"/>
-                                                <constraint firstItem="E0t-NV-3aM" firstAttribute="bottom" secondItem="lAO-CT-wAg" secondAttribute="bottom" constant="8" id="phR-jK-Hbe"/>
+                                                <constraint firstItem="lAO-CT-wAg" firstAttribute="bottom" secondItem="E0t-NV-3aM" secondAttribute="bottom" constant="8" id="phR-jK-Hbe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Background"/>
                                         <connections>
-                                            <outlet property="cellImage" destination="lAO-CT-wAg" id="Dz0-gP-AgJ"/>
-                                            <outlet property="dateLabel" destination="E0t-NV-3aM" id="Jzt-L2-uA8"/>
-                                            <outlet property="likeButton" destination="tLY-G2-qVC" id="Q5g-Kv-B8s"/>
+                                            <outlet property="cellImage" destination="lAO-CT-wAg" id="fHb-yE-L6Q"/>
+                                            <outlet property="dateLabel" destination="E0t-NV-3aM" id="Emn-HZ-dFb"/>
+                                            <outlet property="likeButton" destination="tLY-G2-qVC" id="oOu-TR-diL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -89,7 +95,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Active" width="42" height="42"/>
+        <image name="active" width="42" height="42"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

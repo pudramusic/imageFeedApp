@@ -18,6 +18,7 @@ class ImageListViewController: UIViewController {
     
     // MARK: - Properties
     
+    
     private let photoName: [String] = Array(0..<20).map{ "\($0)"} // создаем массив с картинками с названиями от 0 до 19
     
     private lazy var dateFormatter: DateFormatter = {
@@ -35,26 +36,20 @@ class ImageListViewController: UIViewController {
         
         tableView.dataSource = self // устанавливаем связь с DataSourse, где self это контроллер, который должен выступать как датаСорс
         tableView.delegate = self // устанавливаем связь с Delegate, где self это контроллер, который должен выступать как делегат
-//        tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0) // создаем отступы содержимого ячейки
         
+        //        tableView.register( // оповещаем таблицу о классе ячейки
+        //            ImagesListCell.self,
+        //            forCellReuseIdentifier: ImagesListCell.reuseIdentifier
+        //      )
         
-        tableView.register( // оповещаем таблицу о классе ячейки
-            ImagesListCell.self,
-            forCellReuseIdentifier: ImagesListCell.reuseIdentifier
-        )
         super.viewDidLoad()
         
     }
-    
-    
-    // MARK: - Function
-    
-    
 }
 
 
-// MARK: - Extension
+    // MARK: - Extension
 
 
 extension ImageListViewController: UITableViewDelegate {
@@ -87,8 +82,8 @@ extension ImageListViewController: UITableViewDataSource {
             return UITableViewCell() // возвращаем ячейку
         }
         
-        cell.layer.cornerRadius = 16
-        cell.layer.masksToBounds = true
+        //        cell.layer.cornerRadius = 16
+        //        cell.layer.masksToBounds = true
         
         configCell(for: imageListCell, with: indexPath) // вызываем метод конфигурации ячейки
         return imageListCell // возвращаем ячейку
