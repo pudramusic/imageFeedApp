@@ -10,15 +10,13 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell { // класс для хранения всех свойств нашей ячейки
     
-    
     // MARK: - Lifecycle
     
-    @IBOutlet var cellImage: UIImageView!
-    @IBOutlet var likeButton: UIButton!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     
     // MARK: - Properties
-    
     
     static let reuseIdentifier = "ImagesListCell" // создаем идентификатор для переиспользования ячейки
     

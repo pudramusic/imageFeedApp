@@ -9,16 +9,12 @@ import UIKit
 
 class ImageListViewController: UIViewController {
     
-    
     // MARK: - Lifecycle
-    
     
     @IBOutlet private var tableView: UITableView!
     
-    
     // MARK: - Properties
-    
-    
+        
     private let photoName: [String] = Array(0..<20).map{ "\($0)"} // создаем массив с картинками с названиями от 0 до 19
     
     private lazy var dateFormatter: DateFormatter = {
@@ -28,29 +24,20 @@ class ImageListViewController: UIViewController {
         return formatter
     }()
     
-    
     // MARK: - Override
-    
     
     override func viewDidLoad() {
         
         tableView.dataSource = self // устанавливаем связь с DataSourse, где self это контроллер, который должен выступать как датаСорс
         tableView.delegate = self // устанавливаем связь с Delegate, где self это контроллер, который должен выступать как делегат
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0) // создаем отступы содержимого ячейки
-        
-        //        tableView.register( // оповещаем таблицу о классе ячейки
-        //            ImagesListCell.self,
-        //            forCellReuseIdentifier: ImagesListCell.reuseIdentifier
-        //      )
-        
+
         super.viewDidLoad()
         
     }
 }
 
-
     // MARK: - Extension
-
 
 extension ImageListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { // отвечает за действия, которые будут выполнены после тапа
@@ -81,12 +68,9 @@ extension ImageListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else { // чтобы работать с ячейкой как с экз класса ImageListCell проводим приведение типов
             return UITableViewCell() // возвращаем ячейку
         }
-        
-        //        cell.layer.cornerRadius = 16
-        //        cell.layer.masksToBounds = true
-        
+
         configCell(for: imageListCell, with: indexPath) // вызываем метод конфигурации ячейки
-        return imageListCell // возвращаем ячейку
+        return imageListCell
     }
 }
 
