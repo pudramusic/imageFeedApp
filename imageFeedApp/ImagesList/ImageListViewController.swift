@@ -80,9 +80,12 @@ extension ImageListViewController {
             return
         }
         cell.cellImage.image = image // устанавливаем изображение в ячейку
-        cell.dateLabel.text = dateFormatter.string(from: Date()) // устанавливаем дату в ячейку
+        cell.cellImage.layer.cornerRadius = 16
+        cell.cellImage.layer.masksToBounds = true
         
-        let isLiked = indexPath.row % 2 == 0 // проверяем нравится ли картинка. Если после деления индекса на 2 = 0, то это true
+        cell.dateLabel.text = dateFormatter.string(from: Date()) // устанавливаем дату в ячейку
+
+        let isLiked = indexPath.row % 2 == 0 // проверяем нравится ли картинка.
         let likeImage = isLiked ? UIImage(named: "active") : UIImage(named: "noActive") // данная переменная содержит ответ для кнопки в зависимости понравилась картинка или нет
         cell.likeButton.setImage(likeImage, for: .normal) // устанавливаем значение
     }
