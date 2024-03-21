@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B4Y-za-7dn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OCl-r0-dbe">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -82,13 +82,14 @@
                             <constraint firstAttribute="top" secondItem="PtZ-Cc-6yM" secondAttribute="top" id="hvu-At-Cqc"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="mainActive" id="Nwr-1z-Egg"/>
                     <connections>
                         <outlet property="tableView" destination="PtZ-Cc-6yM" id="9nJ-NZ-FSd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="277" y="-680"/>
+            <point key="canvasLocation" x="-416" y="-1343"/>
         </scene>
         <!--Profile-->
         <scene sceneID="5BG-sN-CH6">
@@ -154,6 +155,7 @@
                             <constraint firstItem="CuS-Mq-xp5" firstAttribute="top" secondItem="Ngl-za-e00" secondAttribute="top" constant="32" id="w6A-eh-zff"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="profileActive" id="07R-0l-JpK"/>
                     <connections>
                         <outlet property="avatarImageView" destination="CuS-Mq-xp5" id="6cR-Qd-8Cj"/>
                         <outlet property="descriptionLabel" destination="qur-zr-bxM" id="f5F-kB-mYV"/>
@@ -166,11 +168,33 @@
             </objects>
             <point key="canvasLocation" x="-416.03053435114504" y="-679.57746478873241"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="L1l-2F-dAp">
+            <objects>
+                <tabBarController id="OCl-r0-dbe" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OP1-mv-U9S">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="YP Background"/>
+                        <color key="barTintColor" name="YP Background"/>
+                        <color key="selectedImageTintColor" name="YP White"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ODY-83-7HV"/>
+                        <segue destination="B4Y-za-7dn" kind="relationship" relationship="viewControllers" id="Rjw-l5-P1l"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FHa-D1-Ro6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1250" y="-1018"/>
+        </scene>
     </scenes>
     <resources>
         <image name="active" width="42" height="42"/>
         <image name="avatar" width="70" height="70"/>
         <image name="exit" width="24" height="24"/>
+        <image name="mainActive" width="30" height="30"/>
+        <image name="profileActive" width="30" height="30"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
