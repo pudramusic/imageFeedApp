@@ -16,6 +16,7 @@
 		D98999AC2B91C5750081341A /* imageFeedApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D98999AA2B91C5750081341A /* imageFeedApp.xcdatamodeld */; };
 		D98999AE2B91C5780081341A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D98999AD2B91C5780081341A /* Assets.xcassets */; };
 		D98999B12B91C5780081341A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D98999AF2B91C5780081341A /* LaunchScreen.storyboard */; };
+		D98BEEE12BAC8B4E008297D2 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98BEEE02BAC8B4E008297D2 /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D98999AD2B91C5780081341A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D98999B02B91C5780081341A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D98999B22B91C5780081341A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D98BEEE02BAC8B4E008297D2 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				D914044D2B9F15CB006C49AF /* ImagesListCell.swift */,
 				D98999A52B91C5750081341A /* ImageListViewController.swift */,
+				D98BEEE02BAC8B4E008297D2 /* SingleImageViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */,
 				D98999A62B91C5750081341A /* ImageListViewController.swift in Sources */,
 				D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */,
+				D98BEEE12BAC8B4E008297D2 /* SingleImageViewController.swift in Sources */,
 				D98999AC2B91C5750081341A /* imageFeedApp.xcdatamodeld in Sources */,
 				D98999A22B91C5750081341A /* AppDelegate.swift in Sources */,
 				D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */,
