@@ -18,6 +18,7 @@ final class SingleImageViewController: UIViewController {
     // MARK: - Lifecycle
     
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var backwardButton: UIButton!
     
     // MARK: - Override
     
@@ -25,4 +26,11 @@ final class SingleImageViewController: UIViewController {
         super.viewDidLoad()
         imageView.image = image
     }
+    
+    // MARK: - Action
+    
+    @IBAction func didTapBackwardButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil) // скрываем экран
+    }
+    
 }

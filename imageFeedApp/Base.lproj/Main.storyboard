@@ -85,7 +85,7 @@
                     <navigationItem key="navigationItem" id="JJC-Mw-Z7T"/>
                     <connections>
                         <outlet property="tableView" destination="PtZ-Cc-6yM" id="9nJ-NZ-FSd"/>
-                        <segue destination="bTJ-h6-tWf" kind="show" identifier="ShowSingleImage" id="Vsp-gi-5o4"/>
+                        <segue destination="bTJ-h6-tWf" kind="presentation" identifier="ShowSingleImage" modalPresentationStyle="fullScreen" id="Vsp-gi-5o4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -101,20 +101,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ncf-YR-Xtr">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uJ-15-V4J" userLabel="BackwardButton">
+                                <rect key="frame" x="42" y="49" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="ekz-jK-ZGf"/>
+                                    <constraint firstAttribute="width" constant="24" id="nFo-Tr-K6x"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="backward"/>
+                                <connections>
+                                    <action selector="didTapBackwardButton:" destination="bTJ-h6-tWf" eventType="touchUpInside" id="PIg-5W-aYd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xvr-lu-wyY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="leading" secondItem="xvr-lu-wyY" secondAttribute="leading" id="RQj-8N-8dq"/>
-                            <constraint firstItem="xvr-lu-wyY" firstAttribute="bottom" secondItem="ncf-YR-Xtr" secondAttribute="bottom" id="UJv-s4-WY6"/>
-                            <constraint firstItem="xvr-lu-wyY" firstAttribute="trailing" secondItem="ncf-YR-Xtr" secondAttribute="trailing" id="dTW-4s-bgf"/>
-                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="top" secondItem="xvr-lu-wyY" secondAttribute="top" id="tS0-2F-P2Y"/>
+                            <constraint firstItem="6uJ-15-V4J" firstAttribute="leading" secondItem="xvr-lu-wyY" secondAttribute="leading" constant="9" id="4II-6w-TXO"/>
+                            <constraint firstItem="6uJ-15-V4J" firstAttribute="top" secondItem="xvr-lu-wyY" secondAttribute="top" constant="9" id="G8U-rM-xgl"/>
+                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="leading" secondItem="mrZ-bq-SBV" secondAttribute="leading" id="RQj-8N-8dq"/>
+                            <constraint firstAttribute="bottom" secondItem="ncf-YR-Xtr" secondAttribute="bottom" id="UJv-s4-WY6"/>
+                            <constraint firstAttribute="trailing" secondItem="ncf-YR-Xtr" secondAttribute="trailing" id="dTW-4s-bgf"/>
+                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="top" secondItem="mrZ-bq-SBV" secondAttribute="top" id="tS0-2F-P2Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TlW-0E-AQE"/>
                     <connections>
+                        <outlet property="backwardButton" destination="6uJ-15-V4J" id="zhp-u0-Xsj"/>
                         <outlet property="imageView" destination="ncf-YR-Xtr" id="g10-O7-nZB"/>
                     </connections>
                 </viewController>
@@ -248,6 +263,7 @@
         <image name="0" width="1600" height="1059"/>
         <image name="active" width="42" height="42"/>
         <image name="avatar" width="70" height="70"/>
+        <image name="backward" width="24" height="24"/>
         <image name="exit" width="24" height="24"/>
         <image name="mainActive" width="30" height="30"/>
         <image name="profileActive" width="30" height="30"/>
