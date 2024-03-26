@@ -23,6 +23,7 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var backwardButton: UIButton!
+    @IBOutlet var shareButton: UIButton!
     
     // MARK: - Properties
     
@@ -45,6 +46,9 @@ final class SingleImageViewController: UIViewController {
     
     @IBAction func didTapBackwardButton(_ sender: Any) {
         dismiss(animated: true, completion: nil) // скрываем экран
+    }
+    
+    @IBAction func didTapShareButton(_ sender: Any) {
     }
     
 }
@@ -76,6 +80,12 @@ extension SingleImageViewController: UIScrollViewDelegate {
         let x = (newContentSize.width - visibleRectSize.width) / 2 // центруем по оси Х
         let y = (newContentSize.height - visibleRectSize.height) / 2 // по оси Y
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+        
+        // вычисляем внутренние отступы, чтобы оцентровать картинку после зумирования
+        let contentInsetX = x * scale //
+        let contentInsetY = y * scale
+        scrollView.contentInset = UIEdgeInsets(top: contentInsetY, left: contentInsetX, bottom: contentInsetY, right: contentInsetX) // устанавливаем внутренние отступы
+        scrollView.contentInsetAdjustmentBehavior = .automatic // устанавливаем отскок содержимого внутри отступов
         
     }
 }
