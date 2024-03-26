@@ -14,7 +14,7 @@ final class ImageListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     
     // MARK: - Properties
-        
+    
     private let photoName: [String] = Array(0..<20).map{ "\($0)"} // создаем массив с картинками с названиями от 0 до 19
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
@@ -29,10 +29,10 @@ final class ImageListViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        tableView.dataSource = self // устанавливаем связь с DataSourse
-        tableView.delegate = self // устанавливаем связь с Delegate
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0) // создаем отступы содержимого ячейки
-
+        
         super.viewDidLoad()
         
     }
@@ -55,20 +55,20 @@ final class ImageListViewController: UIViewController {
     }
 }
 
-    // MARK: - Extension
+// MARK: - Extension
 
 extension ImageListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { // отвечает за действия после тапа по ячейке
-        tableView.deselectRow(at: indexPath, animated: true) // убираем подсветку после тапа
+        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // задаем высоту ячейке, т.к ячейки имеют «динамическую» высоту
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // задаем высоту ячейке
         guard let image = UIImage(named: photoName[indexPath.row]) else { // проверяем наличие изображения
             return 0
         }
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16) // создаем экземпляр который содержит отступы от краев изображения
-        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right // вычисляем ширину изображения внутри ячейки путем вычитания левого и правого отступов
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right // вычисляем ширину изображения
         let imageWidth = image.size.width // присваиваем ширину исходного изображения
         let scale = imageViewWidth / imageWidth // вычисляем масштаб по ширине, который позволит пропорционально изменить размер картинки для отображения в ячейке
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom // рассчитываем высоту ячейки, учитывая высоту изображения, масштаб и отступы сверху и снизу
@@ -87,7 +87,7 @@ extension ImageListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else { // чтобы работать с ячейкой как с экз класса ImageListCell проводим приведение типов
             return UITableViewCell()
         }
-
+        
         configCell(for: imageListCell, with: indexPath) // вызываем метод конфигурации ячейки
         return imageListCell
     }
@@ -103,7 +103,7 @@ extension ImageListViewController {
         cell.cellImage.layer.masksToBounds = true
         
         cell.dateLabel.text = dateFormatter.string(from: Date()) // устанавливаем дату в ячейку
-
+        
         let isLiked = indexPath.row % 2 == 0 // проверяем нравится ли картинка.
         let likeImage = isLiked ? UIImage(named: "active") : UIImage(named: "noActive")
         cell.likeButton.setImage(likeImage, for: .normal)

@@ -100,14 +100,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ncf-YR-Xtr">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jgy-z0-HBs">
+                                <rect key="frame" x="-20" y="-20" width="433" height="892"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ncf-YR-Xtr">
+                                        <rect key="frame" x="20" y="20" width="393" height="852"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Ywh-dq-0Ds"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="YW8-xx-6B0"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bTJ-h6-tWf" id="B1E-c4-u5Z"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uJ-15-V4J" userLabel="BackwardButton">
-                                <rect key="frame" x="42" y="49" width="24" height="24"/>
+                                <rect key="frame" x="9" y="9" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="ekz-jK-ZGf"/>
-                                    <constraint firstAttribute="width" constant="24" id="nFo-Tr-K6x"/>
+                                    <constraint firstAttribute="height" constant="48" id="ekz-jK-ZGf"/>
+                                    <constraint firstAttribute="width" constant="48" id="nFo-Tr-K6x"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="backward"/>
@@ -120,22 +131,23 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="6uJ-15-V4J" firstAttribute="leading" secondItem="xvr-lu-wyY" secondAttribute="leading" constant="9" id="4II-6w-TXO"/>
+                            <constraint firstItem="xvr-lu-wyY" firstAttribute="bottom" secondItem="Jgy-z0-HBs" secondAttribute="bottom" id="EnB-S2-paC"/>
+                            <constraint firstItem="xvr-lu-wyY" firstAttribute="trailing" secondItem="Jgy-z0-HBs" secondAttribute="trailing" id="Ew4-ss-vfp"/>
                             <constraint firstItem="6uJ-15-V4J" firstAttribute="top" secondItem="xvr-lu-wyY" secondAttribute="top" constant="9" id="G8U-rM-xgl"/>
-                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="leading" secondItem="mrZ-bq-SBV" secondAttribute="leading" id="RQj-8N-8dq"/>
-                            <constraint firstAttribute="bottom" secondItem="ncf-YR-Xtr" secondAttribute="bottom" id="UJv-s4-WY6"/>
-                            <constraint firstAttribute="trailing" secondItem="ncf-YR-Xtr" secondAttribute="trailing" id="dTW-4s-bgf"/>
-                            <constraint firstItem="ncf-YR-Xtr" firstAttribute="top" secondItem="mrZ-bq-SBV" secondAttribute="top" id="tS0-2F-P2Y"/>
+                            <constraint firstItem="xvr-lu-wyY" firstAttribute="leading" secondItem="Jgy-z0-HBs" secondAttribute="leading" id="K05-P0-FEP"/>
+                            <constraint firstItem="xvr-lu-wyY" firstAttribute="top" secondItem="Jgy-z0-HBs" secondAttribute="top" id="dBF-So-Rd4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TlW-0E-AQE"/>
                     <connections>
                         <outlet property="backwardButton" destination="6uJ-15-V4J" id="zhp-u0-Xsj"/>
                         <outlet property="imageView" destination="ncf-YR-Xtr" id="g10-O7-nZB"/>
+                        <outlet property="scrollView" destination="Jgy-z0-HBs" id="ywG-EL-sGP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ck-Hx-gih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="891" y="-1344"/>
+            <point key="canvasLocation" x="890.83969465648852" y="-1344.3661971830986"/>
         </scene>
         <!--Profile-->
         <scene sceneID="5BG-sN-CH6">
