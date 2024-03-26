@@ -31,7 +31,7 @@ final class ImageListViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0) // создаем отступы содержимого ячейки
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0) // устанавливаем отступы содержимого ячейки
         
         super.viewDidLoad()
         

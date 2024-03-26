@@ -25,9 +25,6 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet var backwardButton: UIButton!
     @IBOutlet var shareButton: UIButton!
     
-    // MARK: - Properties
-    
-    
     // MARK: - Override
     
     override func viewDidLoad() {
@@ -39,7 +36,6 @@ final class SingleImageViewController: UIViewController {
         imageView.image = image
         imageView.frame.size = image!.size
         rescaleAndCenterImageInScrollView(image: image!)
-        
     }
     
     // MARK: - Action
@@ -49,13 +45,16 @@ final class SingleImageViewController: UIViewController {
     }
     
     @IBAction func didTapShareButton(_ sender: Any) {
+        let share = UIActivityViewController(activityItems: [image], // добавили функционал шеринга картинок
+                                             applicationActivities: nil)
+        present(share, animated: true, completion: nil)
     }
     
 }
 
 // MARK: - extension
 
-extension SingleImageViewController: UIScrollViewDelegate { 
+extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         imageView
     }
@@ -82,7 +81,7 @@ extension SingleImageViewController: UIScrollViewDelegate {
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
         
         // вычисляем внутренние отступы, чтобы оцентровать картинку после зумирования
-        let contentInsetX = x * scale //
+        let contentInsetX = x * scale
         let contentInsetY = y * scale
         scrollView.contentInset = UIEdgeInsets(top: contentInsetY, left: contentInsetX, bottom: contentInsetY, right: contentInsetX) // устанавливаем внутренние отступы
         scrollView.contentInsetAdjustmentBehavior = .automatic // устанавливаем отскок содержимого внутри отступов
