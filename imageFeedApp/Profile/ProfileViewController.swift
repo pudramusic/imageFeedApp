@@ -1,9 +1,3 @@
-//
-//  ProfileViewController.swift
-//  imageFeedApp
-//
-//  Created by Yo on 18/3/24.
-//
 
 import UIKit
 
@@ -50,8 +44,7 @@ extension ProfileViewController {
     
     func configureAvatarImageView() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        let avatarImage = UIImage(named: "avatar") ?? UIImage(systemName: "person.crop.circle.fill")
-        let avatarImageView = UIImageView(image: avatarImage)
+        avatarImageView.image = UIImage(named: "avatar") ?? UIImage(systemName: "person.crop.circle.fill")
         avatarImageView.tintColor = .ypGray
         view.addSubview(avatarImageView)
         
@@ -66,18 +59,15 @@ extension ProfileViewController {
     
     func  configureLogoutButton() {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        let logoutButton = UIButton.systemButton(
-            with: UIImage(named: "exit") ?? UIImage(systemName: "ipad.and.arrow.forward")!,
-            target: self,
-            action: #selector(Self.didTapLogoutButton)
-        )
+        logoutButton.setImage(UIImage(named: "exit") ?? UIImage(systemName: "ipad.and.arrow.forward")!, for: .normal)
+        logoutButton.addTarget(self, action: #selector(Self.didTapLogoutButton), for: .touchUpInside)
         logoutButton.tintColor = .ypRed
         view.addSubview(logoutButton)
         
         NSLayoutConstraint.activate([
             logoutButton.heightAnchor.constraint(equalToConstant: 24),
             logoutButton.widthAnchor.constraint(equalToConstant: 24),
-            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55)
         ])
     }
@@ -97,10 +87,28 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.textColor = .ypGray
+        loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        view.addSubview(loginNameLabel)
+        
+        NSLayoutConstraint.activate([
+            loginNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8)
+        ])
     }
     
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.text = "Hello, world!"
+        descriptionLabel.textColor = .ypWhite
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        view.addSubview(descriptionLabel)
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8)
+        ])
     }
 }
 
