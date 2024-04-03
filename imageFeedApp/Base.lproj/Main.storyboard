@@ -203,11 +203,10 @@
         <!--Navigation Controller-->
         <scene sceneID="Rbw-Wf-uKg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5uO-dB-TkY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="5uO-dB-TkY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="mainActive" id="Nwr-1z-Egg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yaC-h3-0bP">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="YP White"/>
                         <color key="barTintColor" name="YP White"/>
