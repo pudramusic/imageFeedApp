@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D906FE992BA83FED007A8C5A /* ProfileViewController.swift */; };
 		D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914044D2B9F15CB006C49AF /* ImagesListCell.swift */; };
+		D92589072BBDA3E800632180 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D92589062BBDA3E800632180 /* Alamofire */; };
+		D92589092BBDA3E800632180 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D92589082BBDA3E800632180 /* AlamofireDynamic */; };
+		D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890A2BBFE0E800632180 /* AuthViewController.swift */; };
+		D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960BF9E2BBD561D00FE3B6A /* Constants.swift */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
 		D98999A62B91C5750081341A /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A52B91C5750081341A /* ImageListViewController.swift */; };
@@ -22,6 +26,8 @@
 /* Begin PBXFileReference section */
 		D906FE992BA83FED007A8C5A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D914044D2B9F15CB006C49AF /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		D925890A2BBFE0E800632180 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		D960BF9E2BBD561D00FE3B6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D989999E2B91C5750081341A /* imageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98999A12B91C5750081341A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D98999A32B91C5750081341A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92589072BBDA3E800632180 /* Alamofire in Frameworks */,
+				D92589092BBDA3E800632180 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +70,14 @@
 			path = ImagesList;
 			sourceTree = "<group>";
 		};
+		D925890C2BC02BE100632180 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D925890A2BBFE0E800632180 /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		D98999952B91C5750081341A = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +97,7 @@
 		D98999A02B91C5750081341A /* imageFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				D925890C2BC02BE100632180 /* Auth */,
 				D906FE9B2BA86421007A8C5A /* Profile */,
 				D914044F2B9F1627006C49AF /* ImagesList */,
 				D98BEEE22BAEB32F008297D2 /* SingleImageViewController */,
@@ -91,6 +108,7 @@
 				D98999AA2B91C5750081341A /* imageFeedApp.xcdatamodeld */,
 				D98999A12B91C5750081341A /* AppDelegate.swift */,
 				D98999A32B91C5750081341A /* SceneDelegate.swift */,
+				D960BF9E2BBD561D00FE3B6A /* Constants.swift */,
 			);
 			path = imageFeedApp;
 			sourceTree = "<group>";
@@ -119,6 +137,10 @@
 			dependencies = (
 			);
 			name = imageFeedApp;
+			packageProductDependencies = (
+				D92589062BBDA3E800632180 /* Alamofire */,
+				D92589082BBDA3E800632180 /* AlamofireDynamic */,
+			);
 			productName = imageFeedApp;
 			productReference = D989999E2B91C5750081341A /* imageFeedApp.app */;
 			productType = "com.apple.product-type.application";
@@ -147,6 +169,9 @@
 				Base,
 			);
 			mainGroup = D98999952B91C5750081341A;
+			packageReferences = (
+				D92589052BBDA3E800632180 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = D989999F2B91C5750081341A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -181,6 +206,8 @@
 				D98999AC2B91C5750081341A /* imageFeedApp.xcdatamodeld in Sources */,
 				D98999A22B91C5750081341A /* AppDelegate.swift in Sources */,
 				D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */,
+				D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */,
+				D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +436,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D92589052BBDA3E800632180 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D92589062BBDA3E800632180 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D92589052BBDA3E800632180 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D92589082BBDA3E800632180 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D92589052BBDA3E800632180 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D98999AA2B91C5750081341A /* imageFeedApp.xcdatamodeld */ = {
