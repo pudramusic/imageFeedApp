@@ -12,15 +12,14 @@ class WebViewViewController: UIViewController {
     // MARK: - View
     
     private var webView  = WKWebView()
-    private var backButton = UIButton()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayer()
-        configureBackButton()
-        loadAuthVew()
+        loadAuthView()
+//        webView.navigationDelegate = self
     }
     
     // MARK: - Action
@@ -48,16 +47,9 @@ private extension WebViewViewController {
         ])
     }
     
-    func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "backward")
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "ypBlack")
-    }
-    
-    func loadAuthVew() {
+    func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("Autorization paage is not found")
+            print("Autorization page is not found")
             return
         }
         urlComponents.queryItems = [
@@ -67,10 +59,11 @@ private extension WebViewViewController {
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         guard let url = urlComponents.url else {
-            print("Autorization paage is not found")
+            print("Autorization page is not found")
             return
         }
         let request = URLRequest(url: url)
         webView.load(request)
     }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ImagesListCell: UITableViewCell { // класс для хранения всех свойств нашей ячейки
+final class ImagesListCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
@@ -18,7 +18,7 @@ final class ImagesListCell: UITableViewCell { // класс для хранен�
     
     // MARK: - Properties
     
-    static let reuseIdentifier = "ImagesListCell" // создаем идентификатор для переиспользования ячейки
+    static let reuseIdentifier = "ImagesListCell"
     let gradientLayer = CAGradientLayer()
     
     
@@ -37,12 +37,12 @@ final class ImagesListCell: UITableViewCell { // класс для хранен�
         let secondColor = firstColor
         let clearColor = UIColor.clear
         
-        gradientLayer.frame = dateLabel.bounds // устанавливаем размер подложки как и у UILabel
+        gradientLayer.frame = dateLabel.bounds
         gradientLayer.bounds.size.height = 31
         gradientLayer.bounds.size.width = bounds.width
 
-        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor, clearColor.cgColor] // задаем цвпета градиента
-        gradientLayer.locations = [0.0, 0.2, 1.0] // выставляем стоп градиента на 20%
+        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor, clearColor.cgColor]
+        gradientLayer.locations = [0.0, 0.2, 1.0]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
 

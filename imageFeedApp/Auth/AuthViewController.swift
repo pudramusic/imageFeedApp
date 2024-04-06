@@ -13,7 +13,6 @@ class AuthViewController: UIViewController {
     
     private var authImagView = UIImageView()
     private var loginButton = UIButton()
-//    private let ShowWebViewSegueIdentifier = "ShowWebView"
     
     // MARK: - Lifecycle
     
@@ -22,34 +21,26 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .ypBlack
         configureAuthImageView()
         configureLoginButton()
+        configureBackButton()
         
     }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == ShowWebViewSegueIdentifier {
-//            guard
-//                let webViewViewController = segue.destination as? WebViewViewController
-//            else {
-//                fatalError("Invalid segue destination \(ShowWebViewSegueIdentifier)")
-//            }
-//            super.prepare(for: segue, sender: sender)
-//        }
-//    }
     
     // MARK: - Action
     
     @objc
     private func didTapLoginButton() {
-//        performSegue(withIdentifier: ShowWebViewSegueIdentifier, sender: Any?.self)
-                let webViewVewController = WebViewViewController()
-//                webViewVewController.modalPresentationStyle = .fullScreen
-                present(webViewVewController, animated: true, completion: nil)
+        segueToWebViev()
+    }
+    
+    @objc
+    private func didTapBackButton() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - Extension
 
-extension AuthViewController {
+private extension AuthViewController {
     
     func configureAuthImageView() {
         authImagView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +63,9 @@ extension AuthViewController {
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         loginButton.layer.cornerRadius = 16
         loginButton.clipsToBounds = true
-        loginButton.addTarget(self, action: #selector(Self.didTapLoginButton), for: .touchUpInside)
+        loginButton.addTarget(self, 
+                              action: #selector(Self.didTapLoginButton),
+                              for: .touchUpInside)
         view.addSubview(loginButton)
         
         NSLayoutConstraint.activate([
@@ -81,5 +74,22 @@ extension AuthViewController {
             loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
+    }
+    
+    func configureBackButton() {
+        
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "backward")
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didTapBackButton))
+        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "ypBlack")
+    }
+    
+    func segueToWebViev() {
+        let webViewVewController = WebViewViewController()
+        //      webViewVewController.modalPresentationStyle = .fullScreen
+        present(webViewVewController, animated: true, completion: nil)
     }
 }
