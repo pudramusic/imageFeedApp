@@ -217,6 +217,21 @@
             </objects>
             <point key="canvasLocation" x="-416" y="-2023"/>
         </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="m8c-Qj-szg">
+            <objects>
+                <viewController id="e7w-TX-UqT" customClass="WebViewViewController" customModule="imageFeedApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="88D-E5-6vd">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="h0g-Pd-QZB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rrP-wZ-Yit" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="363" y="-2023"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rbw-Wf-uKg">
             <objects>
@@ -243,10 +258,9 @@
         <!--Navigation Controller-->
         <scene sceneID="MO7-4b-vof">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p1M-Qm-dbL" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="p1M-Qm-dbL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iTJ-Ua-ali">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -13,6 +13,7 @@ class AuthViewController: UIViewController {
     
     private var authImagView = UIImageView()
     private var loginButton = UIButton()
+//    private let ShowWebViewSegueIdentifier = "ShowWebView"
     
     // MARK: - Lifecycle
     
@@ -23,12 +24,26 @@ class AuthViewController: UIViewController {
         configureLoginButton()
         
     }
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == ShowWebViewSegueIdentifier {
+//            guard
+//                let webViewViewController = segue.destination as? WebViewViewController
+//            else {
+//                fatalError("Invalid segue destination \(ShowWebViewSegueIdentifier)")
+//            }
+//            super.prepare(for: segue, sender: sender)
+//        }
+//    }
     
     // MARK: - Action
     
     @objc
     private func didTapLoginButton() {
-        
+//        performSegue(withIdentifier: ShowWebViewSegueIdentifier, sender: Any?.self)
+                let webViewVewController = WebViewViewController()
+//                webViewVewController.modalPresentationStyle = .fullScreen
+                present(webViewVewController, animated: true, completion: nil)
     }
 }
 
@@ -47,8 +62,6 @@ extension AuthViewController {
             authImagView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             authImagView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
-        
-        
     }
     
     func  configureLoginButton() {
