@@ -93,3 +93,14 @@ private extension AuthViewController {
         present(webViewVewController, animated: true, completion: nil)
     }
 }
+
+extension AuthViewController: WebViewViewControllerDelegate {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+    }
+    
+    func webViewViewControllerDidCancell(_ vc: WebViewViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+}

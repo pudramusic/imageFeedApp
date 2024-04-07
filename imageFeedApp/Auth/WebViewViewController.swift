@@ -13,20 +13,24 @@ class WebViewViewController: UIViewController {
     
     private var webView  = WKWebView()
     
+    // MARK: - Properties
+    
+    weak var delegate: WebViewViewControllerDelegate?
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayer()
         loadAuthView()
-//        webView.navigationDelegate = self
+        webView.navigationDelegate = self
     }
     
     // MARK: - Action
     
     @objc
-    func didTapBackButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    func didTapBackButton(_ sender: Any?) {
+        delegate?.webViewViewControllerDidCancell(self)
     }
 }
 
@@ -66,4 +70,29 @@ private extension WebViewViewController {
         webView.load(request)
     }
     
+}
+
+extension WebViewViewController: WKNavigationDelegate { // проверка авторизации пользователя
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let code = code(from: navigationAction) {
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel) // если код получен то отменяем навигационное действие
+        } else {
+            decisionHandler(.allow) // если код НЕ получен то разрешаемнавигационное действие
+        }
+    }
+    
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code"})
+        {
+            return codeItem.value
+        } else {
+            return nil
+        }
+    }
 }
