@@ -24,7 +24,7 @@ class WebViewViewController: UIViewController {
         super.viewDidLoad()
         setupLayer()
         loadAuthView()
-//        view.backgroundColor = .ypWhite
+        view.backgroundColor = .ypWhite
         webView.navigationDelegate = self
     }
     
@@ -42,7 +42,7 @@ private extension WebViewViewController {
     
     func setupLayer() {
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.backgroundColor = .ypWhite
+//        webView.backgroundColor = .ypWhite
         view.addSubview(webView)
         
         NSLayoutConstraint.activate([

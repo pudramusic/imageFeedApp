@@ -57,7 +57,7 @@ private extension AuthViewController {
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         loginButton.layer.cornerRadius = 16
         loginButton.clipsToBounds = true
-        loginButton.addTarget(self, 
+        loginButton.addTarget(self,
                               action: #selector(Self.didTapLoginButton),
                               for: .touchUpInside)
         view.addSubview(loginButton)
@@ -71,29 +71,21 @@ private extension AuthViewController {
     }
     
     func setupNavigationBar() {
-        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
-        navigationBar.backgroundColor = .ypBackground
+        navigationController?.navigationBar.backIndicatorImage = UIImage.backward
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didTapBackButton))
+        navigationItem.backBarButtonItem?.tintColor = UIColor.ypBlack
         
-        navigationBar.backIndicatorImage = UIImage(named: "backward")
-        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
         
-        let backButton = UIBarButtonItem(image: .backward,
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(didTapBackButton))
-        backButton.tintColor = .ypBlack
-        
-        let navigationItem = UINavigationItem()
-        navigationItem.leftBarButtonItem = backButton
-        navigationBar.setItems([navigationItem], animated: false)
-        
-        view.addSubview(navigationBar)
     }
     
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
-        webViewVewController.modalPresentationStyle = .overFullScreen
-        present(webViewVewController, animated: true, completion: nil)
+        navigationController?.pushViewController(webViewVewController, animated: true)
+
     }
 }
 
