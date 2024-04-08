@@ -1,9 +1,3 @@
-//
-//  AuthViewController.swift
-//  imageFeedApp
-//
-//  Created by Yo on 5/4/24.
-//
 
 import UIKit
 
@@ -21,7 +15,7 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .ypBlack
         configureAuthImageView()
         configureLoginButton()
-        configureBackButton()
+        setupNavigationBar()
         
     }
     
@@ -29,7 +23,7 @@ class AuthViewController: UIViewController {
     
     @objc
     private func didTapLoginButton() {
-        segueToWebViev()
+        segueToWebView()
     }
     
     @objc
@@ -76,20 +70,29 @@ private extension AuthViewController {
         ])
     }
     
-    func configureBackButton() {
+    func setupNavigationBar() {
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        navigationBar.backgroundColor = .ypBackground
         
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "backward")
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(didTapBackButton))
-        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "ypBlack")
+        navigationBar.backIndicatorImage = UIImage(named: "backward")
+        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
+        
+        let backButton = UIBarButtonItem(image: .backward,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(didTapBackButton))
+        backButton.tintColor = .ypBlack
+        
+        let navigationItem = UINavigationItem()
+        navigationItem.leftBarButtonItem = backButton
+        navigationBar.setItems([navigationItem], animated: false)
+        
+        view.addSubview(navigationBar)
     }
     
-    func segueToWebViev() {
+    func segueToWebView() {
         let webViewVewController = WebViewViewController()
-        //      webViewVewController.modalPresentationStyle = .fullScreen
+        webViewVewController.modalPresentationStyle = .overFullScreen
         present(webViewVewController, animated: true, completion: nil)
     }
 }

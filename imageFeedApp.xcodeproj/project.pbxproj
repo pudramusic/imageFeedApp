@@ -14,6 +14,7 @@
 		D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890A2BBFE0E800632180 /* AuthViewController.swift */; };
 		D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890D2BC032C900632180 /* WebViewViewController.swift */; };
 		D92589102BC2808B00632180 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890F2BC2808B00632180 /* WebViewViewControllerDelegate.swift */; };
+		D92589122BC3E94E00632180 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92589112BC3E94E00632180 /* NavigationController.swift */; };
 		D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960BF9E2BBD561D00FE3B6A /* Constants.swift */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 		D925890A2BBFE0E800632180 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		D925890D2BC032C900632180 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		D925890F2BC2808B00632180 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
+		D92589112BC3E94E00632180 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D960BF9E2BBD561D00FE3B6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D989999E2B91C5750081341A /* imageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98999A12B91C5750081341A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				D925890A2BBFE0E800632180 /* AuthViewController.swift */,
 				D925890D2BC032C900632180 /* WebViewViewController.swift */,
 				D925890F2BC2808B00632180 /* WebViewViewControllerDelegate.swift */,
+				D92589112BC3E94E00632180 /* NavigationController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */,
+				D92589122BC3E94E00632180 /* NavigationController.swift in Sources */,
 				D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */,
 				D98999A62B91C5750081341A /* ImageListViewController.swift in Sources */,
 				D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */,

@@ -13,6 +13,7 @@ class WebViewViewController: UIViewController {
     
     private var webView  = WKWebView()
     
+    
     // MARK: - Properties
     
     weak var delegate: WebViewViewControllerDelegate?
@@ -23,6 +24,7 @@ class WebViewViewController: UIViewController {
         super.viewDidLoad()
         setupLayer()
         loadAuthView()
+//        view.backgroundColor = .ypWhite
         webView.navigationDelegate = self
     }
     
