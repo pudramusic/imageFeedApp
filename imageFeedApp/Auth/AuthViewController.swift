@@ -15,7 +15,8 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .ypBlack
         configureAuthImageView()
         configureLoginButton()
-        setupNavigationBar()
+        configureBackButton()
+
         
     }
     
@@ -70,7 +71,7 @@ private extension AuthViewController {
         ])
     }
     
-    func setupNavigationBar() {
+    func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage.backward
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "backward")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
@@ -78,8 +79,8 @@ private extension AuthViewController {
                                                            target: self,
                                                            action: #selector(didTapBackButton))
         navigationItem.backBarButtonItem?.tintColor = UIColor.ypBlack
-        
-        
+
+       
     }
     
     func segueToWebView() {

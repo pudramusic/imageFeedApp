@@ -12,7 +12,7 @@ class WebViewViewController: UIViewController {
     // MARK: - View
     
     private var webView  = WKWebView()
-    
+    private var progressIndicator = UIProgressView()
     
     // MARK: - Properties
     
@@ -23,6 +23,7 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayer()
+        configureProgressIndicator()
         loadAuthView()
         view.backgroundColor = .ypWhite
         webView.navigationDelegate = self
@@ -32,6 +33,7 @@ class WebViewViewController: UIViewController {
     
     @objc
     func didTapBackButton(_ sender: Any?) {
+        hideProgressIndicator()
         delegate?.webViewViewControllerDidCancell(self)
     }
 }
@@ -42,7 +44,6 @@ private extension WebViewViewController {
     
     func setupLayer() {
         webView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.backgroundColor = .ypWhite
         view.addSubview(webView)
         
         NSLayoutConstraint.activate([
@@ -51,6 +52,30 @@ private extension WebViewViewController {
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func configureProgressIndicator() {
+        guard let navigationBar = navigationController?.navigationBar  else { return }
+        
+        progressIndicator.translatesAutoresizingMaskIntoConstraints = false
+        progressIndicator.progressViewStyle = .default
+        progressIndicator.setProgress(0.5, animated: true)
+        progressIndicator.tintColor = UIColor.ypBackground
+        
+        navigationBar.addSubview(progressIndicator)
+       
+            NSLayoutConstraint.activate([
+                progressIndicator.heightAnchor.constraint(equalToConstant: 4),
+                progressIndicator.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
+                progressIndicator.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
+                progressIndicator.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor)
+               
+            ])
+    
+    }
+    
+    func hideProgressIndicator() {
+        progressIndicator.isHidden = true
     }
     
     func loadAuthView() {
