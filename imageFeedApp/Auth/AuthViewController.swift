@@ -16,8 +16,6 @@ class AuthViewController: UIViewController {
         configureAuthImageView()
         configureLoginButton()
         configureBackButton()
-
-        
     }
     
     // MARK: - Action
@@ -79,14 +77,11 @@ private extension AuthViewController {
                                                            target: self,
                                                            action: #selector(didTapBackButton))
         navigationItem.backBarButtonItem?.tintColor = UIColor.ypBlack
-
-       
     }
     
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
         navigationController?.pushViewController(webViewVewController, animated: true)
-
     }
 }
 
@@ -97,6 +92,4 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewControllerDidCancell(_ vc: WebViewViewController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }

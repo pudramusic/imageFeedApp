@@ -55,23 +55,20 @@ private extension WebViewViewController {
     }
     
     func configureProgressIndicator() {
-        guard let navigationBar = navigationController?.navigationBar  else { return }
-        
         progressIndicator.translatesAutoresizingMaskIntoConstraints = false
         progressIndicator.progressViewStyle = .default
-        progressIndicator.setProgress(0.5, animated: true)
+        progressIndicator.setProgress(0.1, animated: true)
         progressIndicator.tintColor = UIColor.ypBackground
         
-        navigationBar.addSubview(progressIndicator)
+        webView.addSubview(progressIndicator)
        
             NSLayoutConstraint.activate([
                 progressIndicator.heightAnchor.constraint(equalToConstant: 4),
-                progressIndicator.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
-                progressIndicator.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
-                progressIndicator.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor)
+                progressIndicator.leadingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.leadingAnchor),
+                progressIndicator.trailingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.trailingAnchor),
+                progressIndicator.topAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.topAnchor)
                
             ])
-    
     }
     
     func hideProgressIndicator() {
@@ -96,7 +93,6 @@ private extension WebViewViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
-    
 }
 
 extension WebViewViewController: WKNavigationDelegate { // проверка авторизации пользователя

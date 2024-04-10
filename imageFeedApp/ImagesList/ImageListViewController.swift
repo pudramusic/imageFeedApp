@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  imageFeedApp
-//
-//  Created by Yo on 1/3/24.
-//
 
 import UIKit
 
@@ -28,16 +22,13 @@ final class ImageListViewController: UIViewController {
     // MARK: - Override
     
     override func viewDidLoad() {
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        
         super.viewDidLoad()
-        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // метод чтобы открыть выбранную картинку
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
                 let viewController = segue.destination as? SingleImageViewController,
@@ -64,7 +55,7 @@ extension ImageListViewController: UITableViewDelegate {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // задаем высоту ячейке
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photoName[indexPath.row]) else {
             return 0
         }
@@ -73,19 +64,18 @@ extension ImageListViewController: UITableViewDelegate {
         let imageWidth = image.size.width
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
-        return cellHeight // возвращаем рассчитанную высоту ячейки
+        return cellHeight
     }
 }
 
 extension ImageListViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { // метод чтобы таблица знала сколько будет ячеек в секции
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoName.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // создаем ячейку, наполняем данными и передаем таблице
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-        
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
@@ -96,7 +86,7 @@ extension ImageListViewController: UITableViewDataSource {
 }
 
 extension ImageListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) { // метод конфигурации ячейки
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image = UIImage(named: photoName[indexPath.row]) else {
             return
         }

@@ -24,7 +24,6 @@ class ProfileViewController: UIViewController {
     private func didTapLogoutButton() {
         
     }
-    
 }
 
 // MARK: - Extension
