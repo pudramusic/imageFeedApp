@@ -8,6 +8,10 @@ class AuthViewController: UIViewController {
     private var authImagView = UIImageView()
     private var loginButton = UIButton()
     
+    // MARK: Properties
+    
+    private let oauth2Service = OAuth2Service.shared
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -16,6 +20,7 @@ class AuthViewController: UIViewController {
         configureAuthImageView()
         configureLoginButton()
         configureBackButton()
+//        OAuth2Service.shared.fetchToken
     }
     
     // MARK: - Action

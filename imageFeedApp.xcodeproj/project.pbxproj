@@ -12,6 +12,9 @@
 		D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890A2BBFE0E800632180 /* AuthViewController.swift */; };
 		D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890D2BC032C900632180 /* WebViewViewController.swift */; };
 		D92589102BC2808B00632180 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890F2BC2808B00632180 /* WebViewViewControllerDelegate.swift */; };
+		D930C7C92BC7C3D900F68BC3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D930C7C82BC7C3D900F68BC3 /* Alamofire */; };
+		D930C7CB2BC7C3D900F68BC3 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D930C7CA2BC7C3D900F68BC3 /* AlamofireDynamic */; };
+		D930C7CE2BC8446600F68BC3 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7CD2BC8446600F68BC3 /* OAuth2Service.swift */; };
 		D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960BF9E2BBD561D00FE3B6A /* Constants.swift */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
@@ -29,6 +32,7 @@
 		D925890A2BBFE0E800632180 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		D925890D2BC032C900632180 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		D925890F2BC2808B00632180 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
+		D930C7CD2BC8446600F68BC3 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		D960BF9E2BBD561D00FE3B6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D989999E2B91C5750081341A /* imageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98999A12B91C5750081341A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D930C7C92BC7C3D900F68BC3 /* Alamofire in Frameworks */,
+				D930C7CB2BC7C3D900F68BC3 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +86,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		D930C7CC2BC843DC00F68BC3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D930C7CD2BC8446600F68BC3 /* OAuth2Service.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		D98999952B91C5750081341A = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +113,7 @@
 		D98999A02B91C5750081341A /* imageFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				D930C7CC2BC843DC00F68BC3 /* Service */,
 				D925890C2BC02BE100632180 /* Auth */,
 				D906FE9B2BA86421007A8C5A /* Profile */,
 				D914044F2B9F1627006C49AF /* ImagesList */,
@@ -140,6 +155,8 @@
 			);
 			name = imageFeedApp;
 			packageProductDependencies = (
+				D930C7C82BC7C3D900F68BC3 /* Alamofire */,
+				D930C7CA2BC7C3D900F68BC3 /* AlamofireDynamic */,
 			);
 			productName = imageFeedApp;
 			productReference = D989999E2B91C5750081341A /* imageFeedApp.app */;
@@ -170,6 +187,7 @@
 			);
 			mainGroup = D98999952B91C5750081341A;
 			packageReferences = (
+				D930C7C72BC7C3D900F68BC3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = D989999F2B91C5750081341A /* Products */;
 			projectDirPath = "";
@@ -200,6 +218,7 @@
 			files = (
 				D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */,
 				D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */,
+				D930C7CE2BC8446600F68BC3 /* OAuth2Service.swift in Sources */,
 				D98999A62B91C5750081341A /* ImageListViewController.swift in Sources */,
 				D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */,
 				D98BEEE12BAC8B4E008297D2 /* SingleImageViewController.swift in Sources */,
@@ -437,6 +456,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D930C7C72BC7C3D900F68BC3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D930C7C82BC7C3D900F68BC3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D930C7C72BC7C3D900F68BC3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D930C7CA2BC7C3D900F68BC3 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D930C7C72BC7C3D900F68BC3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D98999AA2B91C5750081341A /* imageFeedApp.xcdatamodeld */ = {
