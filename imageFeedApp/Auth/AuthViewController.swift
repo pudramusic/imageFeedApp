@@ -10,7 +10,7 @@ class AuthViewController: UIViewController {
     
     // MARK: Properties
     
-    private let oauth2Service = OAuth2Service.shared
+    private let oauth2ServiceAlamofire = OAuth2ServiceAlamofire.shared
     
     // MARK: - Lifecycle
     

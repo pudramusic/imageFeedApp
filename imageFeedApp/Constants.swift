@@ -1,9 +1,3 @@
-//
-//  Constants.swift
-//  imageFeedApp
-//
-//  Created by Yo on 3/4/24.
-//
 
 import Foundation
 
@@ -13,4 +7,8 @@ enum Constants {
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
     static let accessScope = "public+read_user+write_likes"
     static let defaultBaseURL  = URL(string: "https://api.unsplash.com/")!
+}
+
+enum WebViewConstants {
+    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
