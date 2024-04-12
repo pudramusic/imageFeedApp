@@ -6,7 +6,7 @@ final class OAuth2ServiceAlamofire {
     
     static let shared = OAuth2ServiceAlamofire(); private init() {}
     
-    func fetchOAuthToken(with code: String, completion: @escaping (Result<Data, Error>) -> ()) {
+    func fetchOAuthToken(for code: String, completion: @escaping (Result<String, Error>) -> ()) {
         
         let parameters: [String: Any] = [
             "client_id": Constants.accessKey,
@@ -28,9 +28,11 @@ final class OAuth2ServiceAlamofire {
             }
             
             do {
-                let decoder = JSONDecoder()
-                let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                completion(.success(data))
+                let oAuthToken = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                guard let accessToken = oAuthToken.access_token else {
+                    fatalError("Can't decode token!")
+                }
+                completion(.success(accessToken))
             } catch {
                 completion(.failure(NetworkError.invalidDecoding))
             }
