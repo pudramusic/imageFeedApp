@@ -3,6 +3,7 @@ import UIKit
 import Alamofire
 
 final class OAuth2ServiceAlamofire {
+    
     static let shared = OAuth2ServiceAlamofire(); private init() {}
     
     func fetchOAuthToken(with code: String, completion: @escaping (Result<Data, Error>) -> ()) {
@@ -15,18 +16,24 @@ final class OAuth2ServiceAlamofire {
             "grant_type": "authorization_code"
         ]
         
-        AF.request("https://unsplash.com/oauth/token", 
+        AF.request("https://unsplash.com/oauth/token",
                    method: .post,
-                   parameters: parameters).validate().response { response in
+                   parameters: parameters,
+                   encoding: JSONEncoding()).validate().response { response in
             guard let data = response.data else {
                 if let error = response.error {
                     completion(.failure(error))
                 }
                 return
             }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                completion(.success(data))
+            } catch {
+                completion(.failure(NetworkError.invalidDecoding))
+            }
         }
     }
- 
-    
-    
 }

@@ -18,6 +18,7 @@
 		D930C7D32BC95E7400F68BC3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7D22BC95E7400F68BC3 /* NetworkError.swift */; };
 		D930C7D62BC97AFA00F68BC3 /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7D52BC97AFA00F68BC3 /* OAuthTokenResponseBody.swift */; };
 		D930C7D92BC97FAC00F68BC3 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7D82BC97FAC00F68BC3 /* OAuth2TokenStorage.swift */; };
+		D930C7DB2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7DA2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift */; };
 		D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960BF9E2BBD561D00FE3B6A /* Constants.swift */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 		D930C7D22BC95E7400F68BC3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D930C7D52BC97AFA00F68BC3 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		D930C7D82BC97FAC00F68BC3 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
+		D930C7DA2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageProtocol.swift; sourceTree = "<group>"; };
 		D960BF9E2BBD561D00FE3B6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D989999E2B91C5750081341A /* imageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98999A12B91C5750081341A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		D930C7CC2BC843DC00F68BC3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				D930C7DC2BC98D1100F68BC3 /* Storage */,
 				D930C7CF2BC9147900F68BC3 /* Networking */,
 			);
 			path = Service;
@@ -121,9 +124,17 @@
 			isa = PBXGroup;
 			children = (
 				D930C7D52BC97AFA00F68BC3 /* OAuthTokenResponseBody.swift */,
-				D930C7D82BC97FAC00F68BC3 /* OAuth2TokenStorage.swift */,
 			);
 			path = Token;
+			sourceTree = "<group>";
+		};
+		D930C7DC2BC98D1100F68BC3 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D930C7D82BC97FAC00F68BC3 /* OAuth2TokenStorage.swift */,
+				D930C7DA2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		D98999952B91C5750081341A = {
@@ -261,6 +272,7 @@
 				D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */,
 				D930C7D62BC97AFA00F68BC3 /* OAuthTokenResponseBody.swift in Sources */,
 				D930C7D32BC95E7400F68BC3 /* NetworkError.swift in Sources */,
+				D930C7DB2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift in Sources */,
 				D930C7D92BC97FAC00F68BC3 /* OAuth2TokenStorage.swift in Sources */,
 				D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */,
 				D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */,
