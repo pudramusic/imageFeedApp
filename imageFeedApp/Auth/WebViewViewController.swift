@@ -101,20 +101,21 @@ private func updateProgressIndicator() {
     
     func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("Autorization page is not found")
+            print("Ошибка unsplashAuthorize")
             return
         }
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: Constants.secretKey),
+            URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         guard let url = urlComponents.url else {
-            print("Autorization page is not found")
+            print("Ошибка вормирования компонентов для url")
             return
         }
         let request = URLRequest(url: url)
+        print("Ошибка \(request)")
         webView.load(request)
         
         updateProgressIndicator()
@@ -127,7 +128,7 @@ extension WebViewViewController: WKNavigationDelegate { // проверка ав
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel) // если код получен то отменяем навигационное действие
         } else {
-            decisionHandler(.allow) // если код НЕ получен то разрешаемнавигационное действие
+            decisionHandler(.allow) // если код НЕ получен то разрешаем навигационное действие
         }
     }
     

@@ -10,7 +10,7 @@ class AuthViewController: UIViewController {
     
     // MARK: Properties
     
-    private let oAuth2ServiceAlamofire = OAuth2ServiceAlamofire.shared
+    private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
     // MARK: - Lifecycle
@@ -95,7 +95,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         navigationController?.popViewController(animated: true)
         
-        oAuth2ServiceAlamofire.fetchOAuthToken(for: code) { [weak self] result in
+        oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let accessToken):

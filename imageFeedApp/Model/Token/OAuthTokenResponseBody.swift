@@ -8,7 +8,7 @@ struct OAuthTokenResponseBody: Codable {
     let scope: String
     let created_at: Int
     
-    init(from decoder: any Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.access_token = try container.decodeIfPresent(String.self, forKey: .access_token)
         self.token_type = try container.decode(String.self, forKey: .token_type)

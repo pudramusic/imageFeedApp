@@ -3,5 +3,7 @@
 import Foundation
 
 enum NetworkError: Error {
-    case invalidDecoding
+    case httpStatusCode(Int)
+    case urlRequestError(Error)
+    case urlSessionError
 }
