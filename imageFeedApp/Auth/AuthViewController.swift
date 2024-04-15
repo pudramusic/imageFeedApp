@@ -5,7 +5,7 @@ class AuthViewController: UIViewController {
     
     // MARK: - View
     
-    private var authImagView = UIImageView()
+    private var authImageView = UIImageView()
     private var loginButton = UIButton()
     
     // MARK: Properties
@@ -42,15 +42,15 @@ class AuthViewController: UIViewController {
 private extension AuthViewController {
     
     func configureAuthImageView() {
-        authImagView.translatesAutoresizingMaskIntoConstraints = false
-        authImagView.image = UIImage(named: "authScreenLogo")
-        view.addSubview(authImagView)
+        authImageView.translatesAutoresizingMaskIntoConstraints = false
+        authImageView.image = UIImage(named: "authScreenLogo")
+        view.addSubview(authImageView)
         
         NSLayoutConstraint.activate([
-            authImagView.heightAnchor.constraint(equalToConstant: 60),
-            authImagView.widthAnchor.constraint(equalToConstant: 60),
-            authImagView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            authImagView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            authImageView.heightAnchor.constraint(equalToConstant: 60),
+            authImageView.widthAnchor.constraint(equalToConstant: 60),
+            authImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            authImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
     
