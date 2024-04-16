@@ -12,6 +12,7 @@ class AuthViewController: UIViewController {
     
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
+    weak var delegate: AuthViewControllerDelegate?
     
     // MARK: - Lifecycle
     
@@ -21,7 +22,6 @@ class AuthViewController: UIViewController {
         configureAuthImageView()
         configureLoginButton()
         configureBackButton()
-//        OAuth2Service.shared.fetchToken
     }
     
     // MARK: - Action

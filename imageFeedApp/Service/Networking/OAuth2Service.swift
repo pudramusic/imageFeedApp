@@ -5,7 +5,7 @@ final class OAuth2Service {
     static let shared = OAuth2Service(); private init() {}
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest {
-        guard let baseURL = URL(string: "https://unsplash.com") else {
+        guard let baseURL = URL(string: OAuthConstants.baseURL) else {
             preconditionFailure("Unable to construct baseUrl")
         }
         guard let url = URL(

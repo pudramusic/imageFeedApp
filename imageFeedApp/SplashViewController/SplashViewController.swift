@@ -1,9 +1,3 @@
-//
-//  SplashViewController.swift
-//  imageFeedApp
-//
-//  Created by Yo on 15/4/24.
-//
 
 import UIKit
 
@@ -15,6 +9,7 @@ class SplashViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let oAuthTokenStorage = OAuth2TokenStorage()
     private let oAuth2Service = OAuth2Service.shared
     
@@ -24,12 +19,22 @@ class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         configureSplash()
         
-        if oAuthTokenStorage.token == nil {
-            segueToNavigationController()
+        let token = oAuthTokenStorage.token
+        if token == nil {
+            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
             
         } else {
             switchToTabBarVievController()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }
 
@@ -59,17 +64,19 @@ private extension SplashViewController {
         window.rootViewController  = tabBarController
     }
     
-    func segueToNavigationController() {
-        guard let navigationController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NavigationController") as? UINavigationController,
-              let viewController = navigationController.viewControllers[0] as? AuthViewController
-        else {
-                assertionFailure("Unable to instantiate NavigationController")
+    internal override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showAuthenticationScreenSegueIdentifier {
+            guard
+                let navigationController = segue.destination as? UINavigationController,
+                let viewController = navigationController.viewControllers[0] as? AuthViewController
+            else {
+                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
                 return
             }
-
-        UIApplication.shared.windows.first?.rootViewController = viewController
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
-        
+            viewController.delegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
 }
 

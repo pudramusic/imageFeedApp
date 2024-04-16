@@ -5,6 +5,7 @@ final class OAuth2TokenStorage: OAuth2TokenStorageProtocol {
     
     private enum Keys: String { // создали сущность которую нужно хранить
         case token
+        
     }
     
     private let userDefaults = UserDefaults.standard
@@ -26,5 +27,7 @@ final class OAuth2TokenStorage: OAuth2TokenStorageProtocol {
             userDefaults.setValue(data, forKey: Keys.token.rawValue)
         }
     }
-    
 }
+
+
+
