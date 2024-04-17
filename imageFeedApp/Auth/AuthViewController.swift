@@ -93,20 +93,21 @@ private extension AuthViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
+        delegate?.authViewController(self, didAuthenticateWithCode: code)
         
-        oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let accessToken):
-                self.oAuth2TokenStorage.token = accessToken
-                print("Debug \(accessToken)")
-             
-            case.failure(let error):
-                print(error)
-                break
-            }
-        }
+//        oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let accessToken):
+//                self.oAuth2TokenStorage.token = accessToken
+//                print("Debug \(accessToken)")
+//             
+//            case.failure(let error):
+//                print(error)
+//                break
+//            }
+//        }
     }
     
     func webViewViewControllerDidCancell(_ vc: WebViewViewController) {

@@ -32,7 +32,7 @@ final class OAuth2Service {
             case .success(let data):
                 do {
                     let oAuthToken = try JSONDecoder().decode(OAuthTokenResponseBody.self, from:data)
-                    guard let accessToken = oAuthToken.access_token else {
+                    guard let accessToken = oAuthToken.accessToken else {
                         fatalError("Can`t decode token!")
                     }
                     completion(.success(accessToken))

@@ -3,16 +3,23 @@
 import Foundation
 
 struct OAuthTokenResponseBody: Codable {
-    let access_token: String?
-    let token_type: String
-    let scope: String
-    let created_at: Int
+    private enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+        case tokenType = "token_type"
+        case scope = "scope"
+        case createdAt = "created_at"
+    }
     
-    init(from decoder: Decoder) throws {
+    let accessToken: String?
+    let tokenType: String
+    let scope: String
+    let createdAt: Int
+    
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.access_token = try container.decodeIfPresent(String.self, forKey: .access_token)
-        self.token_type = try container.decode(String.self, forKey: .token_type)
+        self.accessToken = try container.decodeIfPresent(String.self, forKey: .accessToken)
+        self.tokenType = try container.decode(String.self, forKey: .tokenType)
         self.scope = try container.decode(String.self, forKey: .scope)
-        self.created_at = try container.decode(Int.self, forKey: .created_at)
+        self.createdAt = try container.decode(Int.self, forKey: .createdAt)
     }
 }

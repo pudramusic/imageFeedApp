@@ -111,7 +111,7 @@ private func updateProgressIndicator() {
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         guard let url = urlComponents.url else {
-            print("Ошибка вормирования компонентов для url")
+            print("Ошибка формирования компонентов для url")
             return
         }
         let request = URLRequest(url: url)
@@ -123,7 +123,9 @@ private func updateProgressIndicator() {
 }
 
 extension WebViewViewController: WKNavigationDelegate { // проверка авторизации пользователя
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, 
+                 decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel) // если код получен то отменяем навигационное действие

@@ -76,7 +76,7 @@ private extension SplashViewController {
             assertionFailure("Invalid window configuration")
             return
         }
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarViewController")
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController  = tabBarController
     }
 }
@@ -90,7 +90,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken
-            case .failure(_):
+                self.switchToTabBarVievController()
+            case .failure(let error):
                 break
             }
         }
@@ -98,6 +99,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        switchToTabBarVievController()
+//        switchToTabBarVievController()
     }
 }
