@@ -1,31 +1,26 @@
 
 import UIKit
 
-final class OAuth2TokenStorage: OAuth2TokenStorageProtocol {
+final class OAuth2TokenStorage {
     
     private enum Keys: String { // создали сущность которую нужно хранить
         case token
         
     }
-    
+    static let shared = OAuth2TokenStorage()
     private let userDefaults = UserDefaults.standard
     
-    var token: String {
+    var token: String? {
         get {
-            guard let data = userDefaults.data(forKey: Keys.token.rawValue),
-                  let token = try? JSONDecoder().decode(String.self, from: data) else {
-                return ""
-            }
-            return token
+            return userDefaults.string(forKey: Keys.token.rawValue)
         }
         set {
-            guard let data = try? JSONEncoder().encode(newValue) else {
-                print("Нельзя сохранить Bearer Token")
-                return
-            }
-            
-            userDefaults.setValue(data, forKey: Keys.token.rawValue)
+            userDefaults.setValue(newValue, forKey: Keys.token.rawValue)
         }
+    }
+    
+    func logout() {
+        userDefaults.removeObject(forKey: Keys.token.rawValue)
     }
 }
 

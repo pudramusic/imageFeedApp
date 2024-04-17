@@ -11,6 +11,10 @@ class ProfileViewController: UIViewController {
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
     
+    // MARK: - Properties
+    
+    private var oAuth2TokenStorage = OAuth2TokenStorage.shared
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -22,6 +26,7 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
+        OAuth2TokenStorage.shared.logout()
         
     }
 }
@@ -61,7 +66,9 @@ extension ProfileViewController {
     func  configureLogoutButton() {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.setImage(UIImage(named: "exit") ?? UIImage(systemName: "ipad.and.arrow.forward")!, for: .normal)
-        logoutButton.addTarget(self, action: #selector(Self.didTapLogoutButton), for: .touchUpInside)
+        logoutButton.addTarget(self, 
+                               action: #selector(Self.didTapLogoutButton),
+                               for: .touchUpInside)
         logoutButton.tintColor = .ypRed
         view.addSubview(logoutButton)
         

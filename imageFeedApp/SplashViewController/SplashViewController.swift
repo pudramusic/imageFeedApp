@@ -20,11 +20,10 @@ class SplashViewController: UIViewController {
         configureSplash()
         
         let token = oAuthTokenStorage.token
-        if token == nil {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
-            
-        } else {
+        if token != nil {
             switchToTabBarVievController()
+        } else {
+            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
     
@@ -33,8 +32,25 @@ class SplashViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
+    // MARK: - Override
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showAuthenticationScreenSegueIdentifier {
+            guard
+                let navigationController = segue.destination as? UINavigationController,
+                let viewController = navigationController.viewControllers[0] as? AuthViewController
+            else {
+                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
+                return
+            }
+            viewController.delegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
 }
 
@@ -63,21 +79,6 @@ private extension SplashViewController {
         let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarViewController")
         window.rootViewController  = tabBarController
     }
-    
-    internal override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-                return
-            }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
@@ -89,7 +90,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }
