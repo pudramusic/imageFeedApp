@@ -101,7 +101,7 @@ private func updateProgressIndicator() {
     
     func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("Ошибка unsplashAuthorize")
+            assertionFailure("Ошибка подготовки \(WebViewConstants.unsplashAuthorizeURLString)")
             return
         }
         urlComponents.queryItems = [

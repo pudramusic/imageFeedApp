@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class OAuth2TokenStorage {
+final class OAuth2TokenStorage: OAuth2TokenStorageProtocol {
     
     private enum Keys: String { // создали сущность которую нужно хранить
         case token

@@ -84,14 +84,17 @@ private extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
-        
+        fetchOAuthToken(code)
+    }
+    
+    func fetchOAuthToken(_ code: String) {
         oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken
                 self.switchToTabBarVievController()
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }
@@ -99,6 +102,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-//        switchToTabBarVievController()
+        //        switchToTabBarVievController()
     }
 }

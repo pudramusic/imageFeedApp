@@ -15,7 +15,7 @@ struct OAuthTokenResponseBody: Codable {
     let scope: String
     let createdAt: Int
     
-    init(from decoder: any Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.accessToken = try container.decodeIfPresent(String.self, forKey: .accessToken)
         self.tokenType = try container.decode(String.self, forKey: .tokenType)
