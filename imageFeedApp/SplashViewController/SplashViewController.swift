@@ -17,7 +17,6 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        configureSplash()
         
         let token = oAuthTokenStorage.token
         if token != nil {
@@ -57,19 +56,6 @@ class SplashViewController: UIViewController {
 // MARK: - Extension
 
 private extension SplashViewController {
-    
-    func configureSplash() {
-        splashView.translatesAutoresizingMaskIntoConstraints = false
-        splashView.backgroundColor = .ypBlack
-        splashView.image = UIImage(named: "VectorLaunchScreen")
-        view.addSubview(splashView)
-        
-        NSLayoutConstraint.activate([
-            splashView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            splashView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
-        ])
-    }
-    
     
     func switchToTabBarVievController() {
         guard let window = UIApplication.shared.windows.first else {

@@ -111,11 +111,9 @@ private func updateProgressIndicator() {
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         guard let url = urlComponents.url else {
-            print("Ошибка формирования компонентов для url")
             return
         }
         let request = URLRequest(url: url)
-        print("Ошибка \(request)")
         webView.load(request)
         
         updateProgressIndicator()
