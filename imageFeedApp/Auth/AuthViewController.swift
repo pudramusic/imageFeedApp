@@ -87,13 +87,13 @@ private extension AuthViewController {
     
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
+        webViewVewController.delegate = self
         navigationController?.pushViewController(webViewVewController, animated: true)
     }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //navigationController?.popViewController(animated: true)
         delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
     

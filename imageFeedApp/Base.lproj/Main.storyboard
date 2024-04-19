@@ -266,7 +266,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <segue destination="p1M-Qm-dbL" kind="presentation" identifier="ShowAuthenticationScreen" id="Bzb-Gn-30L"/>
+                        <segue destination="p1M-Qm-dbL" kind="show" identifier="ShowAuthenticationScreen" id="Bzb-Gn-30L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RS5-h1-VgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -276,15 +276,15 @@
         <!--Navigation Controller-->
         <scene sceneID="MO7-4b-vof">
             <objects>
-                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="p1M-Qm-dbL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="p1M-Qm-dbL" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="tjv-s5-ZgW"/>
                     <navigationBar key="navigationBar" contentMode="left" id="iTJ-Ua-ali">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NVn-el-ybg">
-                        <rect key="frame" x="0.0" y="-10" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>

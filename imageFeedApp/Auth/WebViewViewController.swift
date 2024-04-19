@@ -140,7 +140,7 @@ extension WebViewViewController: WKNavigationDelegate { // проверка ав
             let urlComponents = URLComponents(string: url.absoluteString),
             urlComponents.path == WebViewConstants.urlComponentsPath,
             let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == "code"})
+            let codeItem = items.first(where: {$0.name == "code"})
         {
             return codeItem.value
         } else {

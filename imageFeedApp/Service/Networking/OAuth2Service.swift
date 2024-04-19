@@ -15,7 +15,7 @@ final class OAuth2Service {
             + "&&redirect_uri=\(Constants.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
-            relativeTo: baseURL                         
+            relativeTo: baseURL
         ) else {
             preconditionFailure("Unable to construct url")
         }
@@ -24,7 +24,7 @@ final class OAuth2Service {
         return request
     }
     
-    func fetchOAuthToken(for code: String, completion: @escaping (Result<String,Error>) -> Void) {
+    func fetchOAuthToken(for code: String, completion: @escaping (Result<String, Error>) -> Void) {
         let requestWithCode = makeOAuthTokenRequest(code: code)
         
         let task = URLSession.shared.data(for: requestWithCode){ result in

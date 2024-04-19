@@ -94,7 +94,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken
                 self.switchToTabBarVievController()
-            case .failure(_):
+            case .failure(let error):
                 break
             }
         }
@@ -102,6 +102,5 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        //        switchToTabBarVievController()
     }
 }
