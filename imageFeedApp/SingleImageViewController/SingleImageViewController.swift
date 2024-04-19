@@ -43,11 +43,11 @@ final class SingleImageViewController: UIViewController {
     // MARK: - Action
     
     @IBAction func didTapBackwardButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil) // скрываем экран
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapShareButton(_ sender: Any) {
-        let share = UIActivityViewController(activityItems: [image], // добавили функционал шеринга картинок
+        let share = UIActivityViewController(activityItems: [image],
                                              applicationActivities: nil)
         present(share, animated: true, completion: nil)
     }
