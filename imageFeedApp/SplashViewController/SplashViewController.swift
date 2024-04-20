@@ -1,5 +1,6 @@
 
 import UIKit
+import ProgressHUD
 
 class SplashViewController: UIViewController {
     
@@ -74,8 +75,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     func fetchOAuthToken(_ code: String) {
+        ProgressHUD.animate()
         oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
             guard let self = self else { return }
+            ProgressHUD.dismiss()
             switch result {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken

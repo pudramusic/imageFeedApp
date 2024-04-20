@@ -21,6 +21,7 @@
 		D930C7E02BCD3F1A00F68BC3 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7DF2BCD3F1A00F68BC3 /* SplashViewController.swift */; };
 		D930C7E22BCD5E6400F68BC3 /* AuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930C7E12BCD5E6400F68BC3 /* AuthViewControllerDelegate.swift */; };
 		D960BF9F2BBD561D00FE3B6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D960BF9E2BBD561D00FE3B6A /* Constants.swift */; };
+		D988CFE62BD3B3B400F28CAB /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = D988CFE52BD3B3B400F28CAB /* ProgressHUD */; };
 		D98999A22B91C5750081341A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A12B91C5750081341A /* AppDelegate.swift */; };
 		D98999A42B91C5750081341A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A32B91C5750081341A /* SceneDelegate.swift */; };
 		D98999A62B91C5750081341A /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98999A52B91C5750081341A /* ImageListViewController.swift */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D988CFE62BD3B3B400F28CAB /* ProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +214,7 @@
 			);
 			name = imageFeedApp;
 			packageProductDependencies = (
+				D988CFE52BD3B3B400F28CAB /* ProgressHUD */,
 			);
 			productName = imageFeedApp;
 			productReference = D989999E2B91C5750081341A /* imageFeedApp.app */;
@@ -242,6 +245,7 @@
 			);
 			mainGroup = D98999952B91C5750081341A;
 			packageReferences = (
+				D988CFE42BD3B3B300F28CAB /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = D989999F2B91C5750081341A /* Products */;
 			projectDirPath = "";
@@ -517,6 +521,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D988CFE42BD3B3B300F28CAB /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				kind = exactVersion;
+				version = 14.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D988CFE52BD3B3B400F28CAB /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D988CFE42BD3B3B300F28CAB /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D98999AA2B91C5750081341A /* imageFeedApp.xcdatamodeld */ = {
