@@ -75,10 +75,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     func fetchOAuthToken(_ code: String) {
-        ProgressHUD.animate()
+        UIBlockingProgressHUD.show()
         oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
             guard let self = self else { return }
-            ProgressHUD.dismiss()
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let accessToken):
                 self.oAuthTokenStorage.token = accessToken

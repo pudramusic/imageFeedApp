@@ -38,33 +38,33 @@ final class OAuth2Service {
     }
     
     func fetchOAuthToken(for code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        assert(Thread.isMainThread)
-        if task != nil {
-            if lastCode != code {
-                task?.cancel()
+        
+        assert(Thread.isMainThread) //4
+        
+        if task != nil { //5
+            if lastCode != code { //6
+                task?.cancel() //7
             } else {
+                completion(.failure(AuthServiceError.invalidRequest))
+                return //8
+            }
+        } else {
+            if lastCode == code { //9
                 completion(.failure(AuthServiceError.invalidRequest))
                 return
             }
-        } else {
-            if lastCode == code {
-                completion(.failure(AuthServiceError.invalidRequest))
-            }
         }
         
-        lastCode = code
-        guard let request = makeOAuthTokenRequest(code: code) else {
+        lastCode = code //10
+        guard let requestWithCode = makeOAuthTokenRequest(code: code) else { //11
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
         
-        
-        let requestWithCode = makeOAuthTokenRequest(code: code)
-        
-        let task = URLSession.shared.data(for: request) { [weak self] result in
-            DispatchQueue.main.async {
+        let task = URLSession.shared.data(for: requestWithCode) { [weak self] result in
+            DispatchQueue.main.async { //12
                 
-                switch result {
+                switch result { //13
                 case .success(let data):
                     do {
                         let oAuthToken = try JSONDecoder().decode(OAuthTokenResponseBody.self, from:data)
@@ -78,12 +78,12 @@ final class OAuth2Service {
                 case .failure(let error):
                     completion(.failure(error))
                 }
-                self?.task = nil
-                self?.lastCode = nil
+                self?.task = nil //14
+                self?.lastCode = nil //15
             }
         }
-        self.task = task
-        task.resume()
+        self.task = task //16
+        task.resume() //17
     }
     
     
