@@ -11,3 +11,7 @@ enum NetworkError: Error {
 enum AuthServiceError: Error {
     case invalidRequest
 }
+
+enum ProfileServiceError: Error {
+    case invalidRequest
+}

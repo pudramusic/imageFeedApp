@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     
     private var oAuth2TokenStorage = OAuth2TokenStorage.shared
+    private var profileService = ProfileService.shared
     
     // MARK: - Lifecycle
     

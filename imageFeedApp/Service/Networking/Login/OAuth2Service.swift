@@ -48,12 +48,13 @@ final class OAuth2Service {
                 completion(.failure(AuthServiceError.invalidRequest))
                 return //8
             }
-        } else {
-            if lastCode == code { //9
-                completion(.failure(AuthServiceError.invalidRequest))
-                return
-            }
-        }
+        } 
+//        else {
+//            if lastCode == code { //9
+//                completion(.failure(AuthServiceError.invalidRequest))
+//                return
+//            }
+//        }
         
         lastCode = code //10
         guard let requestWithCode = makeOAuthTokenRequest(code: code) else { //11
