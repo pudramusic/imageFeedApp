@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     
     private var oAuth2TokenStorage = OAuth2TokenStorage.shared
     private var profileService = ProfileService.shared
+    var profileResult: ProfileResult?
     
     // MARK: - Lifecycle
     
@@ -83,7 +84,7 @@ extension ProfileViewController {
     
     func configureNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = profileResult?.name
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         view.addSubview(nameLabel)
@@ -97,7 +98,7 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.text = profileResult?.userName
         loginNameLabel.textColor = .ypGray
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(loginNameLabel)
@@ -112,7 +113,7 @@ extension ProfileViewController {
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = "Hello, world!"
+        descriptionLabel.text = profileResult?.bio
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(descriptionLabel)

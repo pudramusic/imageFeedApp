@@ -8,6 +8,7 @@ final class ProfileService {
     
     static let shared = ProfileService()
     var oAuth2TokenStorage = OAuth2TokenStorage()
+    let profileQueue = DispatchQueue(label: "profileQueue", qos: .userInitiated) // создаем приватную очередь
     
     // MARK: - Init
     
@@ -40,20 +41,23 @@ final class ProfileService {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { [ weak self ] result in
-            switch result {
-            case .success(let data):
-                do {
-                    let profileData = try JSONDecoder().decode(ProfileResult.self, from: data)
-                    completion(.success(profileData))
-                } catch {
+        profileQueue.async {
+            let task = URLSession.shared.data(for: request) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+                        completion(.success(profileResult))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
                     completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
+            task.resume()
         }
-        task.resume()
+       
     }
     
     
