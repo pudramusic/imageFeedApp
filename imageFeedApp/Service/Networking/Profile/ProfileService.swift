@@ -7,8 +7,11 @@ final class ProfileService {
     // MARK: - Properties
     
     static let shared = ProfileService()
+    private let urlSession = URLSession.shared
     var oAuth2TokenStorage = OAuth2TokenStorage()
-    let profileQueue = DispatchQueue(label: "profileQueue", qos: .userInitiated) // создаем приватную очередь
+    private(set) var profile: Profile?
+    private var task: URLSessionTask?
+    private var lastCode: String?
     
     // MARK: - Init
     
@@ -16,19 +19,19 @@ final class ProfileService {
     
     // MARK: - Function
     
-    private func makeProfileRequest() -> URLRequest? {
+    private func makeProfileRequest(token: String) -> URLRequest? {
         guard let defaultBaseURL = URL(string: Constants.defaultBaseURL) else {
             preconditionFailure("Ошибка подготовки url профиля")
         }
-        guard let url = URL(string: ProfileConstants.urlProfilePath
-                            + "?read_user=\(Constants.accessScope)",
+        guard let url = URL(string: ProfileConstants.urlProfilePath,
                             relativeTo: defaultBaseURL
         ) else {
             assertionFailure("Ошибка создания url профиля")
             return nil
         }
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(oAuth2TokenStorage.token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         print(request)
         return request
     }
@@ -36,13 +39,25 @@ final class ProfileService {
     
     
     func fetchProfile(_ token: String, completion: @escaping (Result<ProfileResult, Error>) -> Void) {
-        guard let request = makeProfileRequest() else {
+        
+        assert(Thread.isMainThread)
+        if task != nil {
+            if lastCode != token {
+                task?.cancel()
+            } else {
+                completion(.failure(ProfileServiceError.invalidRequest))
+                return
+            }
+        }
+        lastCode = token
+        
+        guard let request = makeProfileRequest(token: token) else {
             completion(.failure(ProfileServiceError.invalidRequest))
             return
         }
         
-        profileQueue.async {
-            let task = URLSession.shared.data(for: request) { result in
+        let task = urlSession.data(for: request) { result in
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
                     do {
@@ -54,10 +69,12 @@ final class ProfileService {
                 case .failure(let error):
                     completion(.failure(error))
                 }
+                self.task = nil
+                self.lastCode = nil
             }
-            task.resume()
         }
-       
+        self.task = task
+        task.resume()
     }
     
     

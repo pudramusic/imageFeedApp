@@ -15,13 +15,22 @@ class ProfileViewController: UIViewController {
     
     private var oAuth2TokenStorage = OAuth2TokenStorage.shared
     private var profileService = ProfileService.shared
-    var profileResult: ProfileResult?
+    var profile: Profile?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayer()
+        
+//        profileService.fetchProfile(oAuth2TokenStorage.token) { result in
+//            switch result {
+//            case .success(profileResult):
+//                self.profileResult = profileResult
+//            case.failure(let error):
+//                print("Оштбка получения данных профиля")
+//            }
+//        }
     }
     
     // MARK: - Action
@@ -84,7 +93,7 @@ extension ProfileViewController {
     
     func configureNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = profileResult?.name
+        nameLabel.text = ""
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         view.addSubview(nameLabel)
@@ -98,7 +107,7 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginNameLabel.text = profileResult?.userName
+        loginNameLabel.text = ""
         loginNameLabel.textColor = .ypGray
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(loginNameLabel)
@@ -113,7 +122,7 @@ extension ProfileViewController {
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = profileResult?.bio
+        descriptionLabel.text = ""
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(descriptionLabel)

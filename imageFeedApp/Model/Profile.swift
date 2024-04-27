@@ -12,17 +12,8 @@ struct ProfileResult: Codable {
     let firstName: String?
     let lastName: String?
     let bio: String?
+
     
-    var name: String {
-        var fullName = ""
-        if let firstName = firstName {
-            fullName += firstName
-        }
-        if let lastName = lastName {
-            fullName += " " + lastName
-        }
-        return fullName
-    }
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userName = try container.decode(String.self, forKey: .userName)
@@ -30,4 +21,19 @@ struct ProfileResult: Codable {
         self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
         self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
     }
+}
+
+struct Profile {
+    let userName: String
+    let name: String
+    let loginName: String
+    let bio: String?
+    
+    init(result: ProfileResult) {
+        self.userName = result.userName
+        self.name = "\(result.firstName ?? "") \(result.lastName ?? "")"
+        self.loginName = "@\(result.userName)"
+        self.bio = result.bio
+    }
+    
 }
