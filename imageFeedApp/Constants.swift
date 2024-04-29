@@ -19,5 +19,5 @@ enum OAuthConstants {
 }
 
 enum ProfileConstants {
-    static let urlProfilePath = "/me"
+    static let urlProfilePath = "https://api.unsplash.com/me"
 }

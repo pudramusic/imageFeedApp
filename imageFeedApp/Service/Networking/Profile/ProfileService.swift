@@ -20,12 +20,7 @@ final class ProfileService {
     // MARK: - Function
     
     private func makeProfileRequest(token: String) -> URLRequest? {
-        guard let defaultBaseURL = URL(string: Constants.defaultBaseURL) else {
-            preconditionFailure("Ошибка подготовки url профиля")
-        }
-        guard let url = URL(string: ProfileConstants.urlProfilePath,
-                            relativeTo: defaultBaseURL
-        ) else {
+        guard let url = URL(string: ProfileConstants.urlProfilePath) else {
             assertionFailure("Ошибка создания url профиля")
             return nil
         }
@@ -41,14 +36,8 @@ final class ProfileService {
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         
         assert(Thread.isMainThread)
-        if task != nil {
-            if lastCode != token {
-                task?.cancel()
-            } else {
-                completion(.failure(ProfileServiceError.invalidRequest))
-                return
-            }
-        }
+        if lastCode == token { return }
+        task?.cancel()
         lastCode = token
         
         guard let request = makeProfileRequest(token: token) else {
@@ -56,30 +45,39 @@ final class ProfileService {
             return
         }
         
-        let task = urlSession.data(for: request) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    do {
-                        let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                        self.profile = Profile(result: profileResult)
-                        guard let profile = self.profile else { return }
-                        completion(.success(profile))
-                        self.profile = profile
-                    } catch {
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
+        let task = urlSession.dataTask(with: request) { data, response, error in
+            guard let data else {
+                if let error {
                     completion(.failure(error))
                 }
-                self.task = nil
-                self.lastCode = nil
+                return
             }
-        }
+            DispatchQueue.main.async {
+//                switch data {
+//                case .success(let data):
+                    do {
+                        let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+                        let profile = Profile(result: profileResult)
+//                        guard let profile = self.profile else { return }
+                        completion(.success(profile))
+                        self.profile = profile
+                        self.task = nil
+                    } catch {
+                        completion(.failure(error))
+                        self.lastCode = nil
+                    }
+//                case .failure(let error):
+//                    completion(.failure(error))
+                }
+//                self.task = nil
+//                self.lastCode = nil
+            }
         self.task = task
         task.resume()
+        }
+  
     }
     
     
     
-}
+//}
