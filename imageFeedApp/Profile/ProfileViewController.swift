@@ -7,9 +7,9 @@ class ProfileViewController: UIViewController {
     
     private let avatarImageView = UIImageView()
     private let logoutButton = UIButton()
-    private let nameLabel = UILabel()
-    private let loginNameLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private var nameLabel = UILabel()
+    private var loginNameLabel = UILabel()
+    private var descriptionLabel = UILabel()
     
     // MARK: - Properties
     
@@ -22,15 +22,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayer()
-        
-//        profileService.fetchProfile(oAuth2TokenStorage.token) { result in
-//            switch result {
-//            case .success(profileResult):
-//                self.profileResult = profileResult
-//            case.failure(let error):
-//                print("Оштбка получения данных профиля")
-//            }
-//        }
     }
     
     // MARK: - Action
@@ -55,6 +46,8 @@ extension ProfileViewController {
         configureNameLabel()
         configureLoginNameLabel()
         configureDescriptionLabel()
+        // TODO: - доработать или удалить
+        loadProfile(profile: profileService.profile)
     }
     
     func configureAvatarImageView() {
@@ -77,7 +70,7 @@ extension ProfileViewController {
     func  configureLogoutButton() {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.setImage(UIImage(named: "exit") ?? UIImage(systemName: "ipad.and.arrow.forward")!, for: .normal)
-        logoutButton.addTarget(self, 
+        logoutButton.addTarget(self,
                                action: #selector(Self.didTapLogoutButton),
                                for: .touchUpInside)
         logoutButton.tintColor = .ypRed
@@ -93,7 +86,7 @@ extension ProfileViewController {
     
     func configureNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = ""
+        //        nameLabel.text = ""
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         view.addSubview(nameLabel)
@@ -107,7 +100,7 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginNameLabel.text = ""
+//        loginNameLabel.text = ""
         loginNameLabel.textColor = .ypGray
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(loginNameLabel)
@@ -122,7 +115,7 @@ extension ProfileViewController {
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = ""
+//        descriptionLabel.text = ""
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(descriptionLabel)
@@ -132,6 +125,13 @@ extension ProfileViewController {
             descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8)
         ])
+    }
+    
+    func loadProfile(profile: Profile?) {
+        guard let profile = profile else { return }
+        self.nameLabel.text = profile.name
+        self.loginNameLabel.text = profile.loginName
+        self.descriptionLabel.text = profile.bio
     }
 }
 

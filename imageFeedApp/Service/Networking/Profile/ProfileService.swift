@@ -38,7 +38,7 @@ final class ProfileService {
     
     
     
-    func fetchProfile(_ token: String, completion: @escaping (Result<ProfileResult, Error>) -> Void) {
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         
         assert(Thread.isMainThread)
         if task != nil {
@@ -62,7 +62,10 @@ final class ProfileService {
                 case .success(let data):
                     do {
                         let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                        completion(.success(profileResult))
+                        self.profile = Profile(result: profileResult)
+                        guard let profile = self.profile else { return }
+                        completion(.success(profile))
+                        self.profile = profile
                     } catch {
                         completion(.failure(error))
                     }
