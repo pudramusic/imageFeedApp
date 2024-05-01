@@ -46,7 +46,7 @@ final class ProfileService {
         }
         
         let task = urlSession.dataTask(with: request) { data, response, error in
-            guard let data else {
+            guard let data = data else {
                 if let error {
                     completion(.failure(error))
                 }
@@ -57,10 +57,10 @@ final class ProfileService {
 //                case .success(let data):
                     do {
                         let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                        let profile = Profile(result: profileResult)
+                        let person = Profile(result: profileResult)
 //                        guard let profile = self.profile else { return }
-                        completion(.success(profile))
-                        self.profile = profile
+                        completion(.success(person))
+                        self.profile = person
                         self.task = nil
                     } catch {
                         completion(.failure(error))

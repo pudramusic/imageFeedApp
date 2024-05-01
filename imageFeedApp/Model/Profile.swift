@@ -13,7 +13,7 @@ struct ProfileResult: Codable {
     let lastName: String?
     let bio: String?
 
-    
+//    
 //    init(from decoder: Decoder) throws {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //        self.userName = try container.decode(String.self, forKey: .userName)

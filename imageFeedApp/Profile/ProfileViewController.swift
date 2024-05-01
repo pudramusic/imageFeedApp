@@ -47,7 +47,7 @@ extension ProfileViewController {
         configureLoginNameLabel()
         configureDescriptionLabel()
         // TODO: - доработать или удалить
-        loadProfile(profile: profileService.profile)
+//        loadProfile(profile: profileService.profile)
     }
     
     func configureAvatarImageView() {
@@ -127,12 +127,12 @@ extension ProfileViewController {
         ])
     }
     
-    func loadProfile(profile: Profile?) {
-        guard let profile = profile else { return }
-        self.nameLabel.text = profile.name
-        self.loginNameLabel.text = profile.loginName
-        self.descriptionLabel.text = profile.bio
-    }
+//    func loadProfile(profile: Profile?) {
+//        guard let profile = profile else { return }
+//        self.nameLabel.text = profile.name
+//        self.loginNameLabel.text = profile.loginName
+//        self.descriptionLabel.text = profile.bio
+//    }
 }
 
 
