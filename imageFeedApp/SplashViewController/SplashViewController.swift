@@ -11,7 +11,7 @@ class SplashViewController: UIViewController {
     // MARK: - Properties
     
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    private let oAuthTokenStorage = OAuth2TokenStorage()
+    private let storage = OAuth2TokenStorage()
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     
@@ -19,10 +19,9 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let token = oAuthTokenStorage.token
-        if token != nil {
-            switchToTabBarVievController()
+        if let token = storage.token {
+            fetchProfile(token: token)
+//            switchToTabBarVievController()
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
@@ -77,8 +76,8 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        guard let token = oAuthTokenStorage.token else { return }
-        fetchProfile(token)
+        guard let token = storage.token else { return }
+        fetchProfile(token: token)
     }
     
     private func fetchOAuthToken(_ code: String) {
@@ -88,7 +87,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let accessToken):
-                self.oAuthTokenStorage.token = accessToken
+                self.storage.token = accessToken
+//                self.fetchProfile(token: accessToken)
                 self.switchToTabBarVievController()
             case .failure(let error):
                 break
@@ -96,15 +96,13 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-    private func fetchProfile(_ token: String) {
+    private func fetchProfile(token: String) {
         UIBlockingProgressHUD.show()
         profileService.fetchProfile(token) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
-            
             guard let self = self else { return }
-            
             switch result {
-            case .success:
+            case .success(let profile):
                 self.switchToTabBarVievController()
             case .failure(let failure):
                 print(failure.localizedDescription)
@@ -114,6 +112,6 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-
+    
     
 }

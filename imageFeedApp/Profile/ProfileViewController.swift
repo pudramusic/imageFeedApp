@@ -46,8 +46,7 @@ extension ProfileViewController {
         configureNameLabel()
         configureLoginNameLabel()
         configureDescriptionLabel()
-        // TODO: - доработать или удалить
-//        loadProfile(profile: profileService.profile)
+        loadProfile(profile: profileService.profile)
     }
     
     func configureAvatarImageView() {
@@ -86,7 +85,7 @@ extension ProfileViewController {
     
     func configureNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        //        nameLabel.text = ""
+        nameLabel.text = ""
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         view.addSubview(nameLabel)
@@ -100,7 +99,7 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        loginNameLabel.text = ""
+        loginNameLabel.text = ""
         loginNameLabel.textColor = .ypGray
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(loginNameLabel)
@@ -115,7 +114,7 @@ extension ProfileViewController {
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-//        descriptionLabel.text = ""
+        descriptionLabel.text = ""
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(descriptionLabel)
@@ -127,12 +126,12 @@ extension ProfileViewController {
         ])
     }
     
-//    func loadProfile(profile: Profile?) {
-//        guard let profile = profile else { return }
-//        self.nameLabel.text = profile.name
-//        self.loginNameLabel.text = profile.loginName
-//        self.descriptionLabel.text = profile.bio
-//    }
+    func loadProfile(profile: Profile?) {
+        guard let profile = profile else { return }
+        self.nameLabel.text = profile.name
+        self.loginNameLabel.text = profile.loginName
+        self.descriptionLabel.text = profile.bio
+    }
 }
 
 

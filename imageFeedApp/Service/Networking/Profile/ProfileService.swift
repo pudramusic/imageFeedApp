@@ -53,31 +53,22 @@ final class ProfileService {
                 return
             }
             DispatchQueue.main.async {
-//                switch data {
-//                case .success(let data):
-                    do {
-                        let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                        let person = Profile(result: profileResult)
-//                        guard let profile = self.profile else { return }
-                        completion(.success(person))
-                        self.profile = person
-                        self.task = nil
-                    } catch {
-                        completion(.failure(error))
-                        self.lastCode = nil
-                    }
-//                case .failure(let error):
-//                    completion(.failure(error))
+                do {
+                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+                    let person = Profile(result: profileResult)
+                    completion(.success(person))
+                    self.profile = person
+                    self.task = nil
+                } catch {
+                    completion(.failure(error))
+                    self.lastCode = nil
                 }
-//                self.task = nil
-//                self.lastCode = nil
             }
+        }
         self.task = task
         task.resume()
-        }
-  
     }
+ 
     
-    
-    
-//}
+}
+
