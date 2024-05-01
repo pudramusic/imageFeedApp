@@ -62,7 +62,7 @@ final class OAuth2Service {
             return
         }
         
-        let task = URLSession.shared.data(for: requestWithCode) { [weak self] result in
+        let task = urlSession.data(for: requestWithCode) { [weak self] result in
             DispatchQueue.main.async { //12
                 
                 switch result { //13

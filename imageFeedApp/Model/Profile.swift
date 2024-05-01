@@ -12,15 +12,6 @@ struct ProfileResult: Codable {
     let firstName: String?
     let lastName: String?
     let bio: String?
-
-//    
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.userName = try container.decode(String.self, forKey: .userName)
-//        self.firstName = try container.decodeIfPresent(String.self, forKey: .firstName)
-//        self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
-//        self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
-//    }
 }
 
 struct Profile {
