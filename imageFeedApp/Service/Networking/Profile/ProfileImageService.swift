@@ -26,7 +26,7 @@ final class ProfileImageService {
             string: "/users/\(username)",
             relativeTo: baseURL
         ) else {
-            assertionFailure("Unable to construct url")
+            assertionFailure("Unable to construct avatar url")
             return URLRequest(url: URL(string: "")!)
         }
         guard let token = storage.token else {

@@ -14,6 +14,7 @@ class SplashViewController: UIViewController {
     private let storage = OAuth2TokenStorage()
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     // MARK: - Lifecycle
     
@@ -112,6 +113,17 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-    
+    private func fetchProfileImageURL(username: String) {
+        profileImageService.fetchProfileImageURL(username: username) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let avatarURL):
+                self.switchToTabBarVievController()
+            case .failure(let failure):
+                print(failure.localizedDescription)
+                break
+            }
+        }
+    }
     
 }
