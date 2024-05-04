@@ -13,9 +13,10 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var oAuth2TokenStorage = OAuth2TokenStorage.shared
+    private var storage = OAuth2TokenStorage.shared
     private var profileService = ProfileService.shared
     var profile: Profile?
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     // MARK: - Lifecycle
     
@@ -28,7 +29,7 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        OAuth2TokenStorage.shared.logout()
+        storage.logout()
         
     }
 }
@@ -37,7 +38,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController {
     
-    // MARK: - Function
+    // MARK: - Setup layer function
     
     func setupLayer() {
         view.backgroundColor = .ypBlack
@@ -46,8 +47,11 @@ extension ProfileViewController {
         configureNameLabel()
         configureLoginNameLabel()
         configureDescriptionLabel()
-        loadProfile(profile: profileService.profile)
+        updateProfile(profile: profileService.profile)
+        profileImageServiceObserve()
     }
+    
+    // MARK: - Configuration function
     
     func configureAvatarImageView() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,12 +130,31 @@ extension ProfileViewController {
         ])
     }
     
-    func loadProfile(profile: Profile?) {
+    func updateProfile(profile: Profile?) {
         guard let profile = profile else { return }
         self.nameLabel.text = profile.name
         self.loginNameLabel.text = profile.loginName
         self.descriptionLabel.text = profile.bio
     }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL) else { return }
+    }
+    
+    func profileImageServiceObserve() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
+    }
+    
 }
 
 

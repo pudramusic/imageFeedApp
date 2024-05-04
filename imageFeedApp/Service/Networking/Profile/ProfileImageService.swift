@@ -11,6 +11,7 @@ final class ProfileImageService {
     private(set) var avatarURL: String?
     private var task: URLSessionTask?
     private var lastUserName: String?
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     // MARK: - init
     
@@ -59,9 +60,11 @@ final class ProfileImageService {
                 do {
                     let profileImageURL = try JSONDecoder().decode(UserResult.self, from: data)
                     let avatarURL = profileImageURL.profileImage.small
-//                    self.avatarURL = avatarURL
-                    completion(.success(avatarURL))
                     self.avatarURL = avatarURL
+                    completion(.success(avatarURL))
+                    NotificationCenter.default.post(name: ProfileImageService.didChangeNotification,
+                                                    object: self,
+                                                    userInfo: ["URL": profileImageURL])
                     self.task = nil
                 } catch {
                     completion(.failure(error))
