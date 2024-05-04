@@ -19,13 +19,13 @@ final class ProfileImageService {
     // MARK: - Function
     
     private func makeProfileImageRequest(username: String) -> URLRequest {
-        guard let baseURL = URL(string: OAuthConstants.baseURL) else {
+        guard let defaultBaseURL = URL(string: Constants.defaultBaseURL) else {
             preconditionFailure("Unable to construct baseUrl")
         }
-        guard let url = URL(
-            string: "/users/\(username)",
-            relativeTo: baseURL
-        ) else {
+        var urlComponents = URLComponents()
+        urlComponents.path = "/users/\(username)"
+        guard let url = urlComponents.url(relativeTo: defaultBaseURL)
+         else {
             assertionFailure("Unable to construct avatar url")
             return URLRequest(url: URL(string: "")!)
         }
@@ -59,6 +59,7 @@ final class ProfileImageService {
                 do {
                     let profileImageURL = try JSONDecoder().decode(UserResult.self, from: data)
                     let avatarURL = profileImageURL.profileImage.small
+//                    self.avatarURL = avatarURL
                     completion(.success(avatarURL))
                     self.avatarURL = avatarURL
                     self.task = nil

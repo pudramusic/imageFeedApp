@@ -89,7 +89,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let accessToken):
                 self.storage.token = accessToken
-//                self.fetchProfile(token: accessToken)
+                // TODO: - закоминтить
+                self.fetchProfile(token: accessToken)
                 self.switchToTabBarVievController()
             case .failure(let error):
                 break
@@ -104,6 +105,14 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let profile):
+                self.profileImageService.fetchProfileImageURL(username: profile.userName) { result in
+                    switch result {
+                    case .success(let avatarURL):
+                        print(avatarURL)
+                    case .failure(let failure):
+                        break
+                    }
+                }
                 self.switchToTabBarVievController()
             case .failure(let failure):
                 print(failure.localizedDescription)
@@ -113,17 +122,17 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-    private func fetchProfileImageURL(username: String) {
-        profileImageService.fetchProfileImageURL(username: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let avatarURL):
-                self.switchToTabBarVievController()
-            case .failure(let failure):
-                print(failure.localizedDescription)
-                break
-            }
-        }
-    }
+//    private func fetchProfileImageURL(username: String) {
+//        profileImageService.fetchProfileImageURL(username: username) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let avatarURL):
+//                self.switchToTabBarVievController()
+//            case .failure(let failure):
+//                print(failure.localizedDescription)
+//                break
+//            }
+//        }
+//    }
     
 }
