@@ -39,52 +39,40 @@ final class OAuth2Service {
     
     func fetchOAuthToken(for code: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        assert(Thread.isMainThread) //4
+        assert(Thread.isMainThread)
         
-        if task != nil { //5
-            if lastCode != code { //6
-                task?.cancel() //7
+        if task != nil {
+            if lastCode != code {
+                task?.cancel()
             } else {
                 completion(.failure(AuthServiceError.invalidRequest))
-                return //8
+                return
             }
-        } 
-//        else {
-//            if lastCode == code { //9
-//                completion(.failure(AuthServiceError.invalidRequest))
-//                return
-//            }
-//        }
+        }
         
-        lastCode = code //10
-        guard let requestWithCode = makeOAuthTokenRequest(code: code) else { //11
+        lastCode = code
+        guard let requestWithCode = makeOAuthTokenRequest(code: code) else {
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
         
-        let task = urlSession.data(for: requestWithCode) { [weak self] result in
-            DispatchQueue.main.async { //12
-                
-                switch result { //13
-                case .success(let data):
-                    do {
-                        let oAuthToken = try JSONDecoder().decode(OAuthTokenResponseBody.self, from:data)
-                        guard let accessToken = oAuthToken.accessToken else {
-                            fatalError("Can`t decode token!")
-                        }
-                        completion(.success(accessToken))
-                    } catch {
-                        completion(.failure(error))
+        let task = urlSession.objectTask(for: requestWithCode) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let body):
+                    guard let accessToken = body.accessToken else {
+                        fatalError("Can`t decode token!")
                     }
+                    completion(.success(accessToken))
                 case .failure(let error):
                     completion(.failure(error))
                 }
-                self?.task = nil //14
-                self?.lastCode = nil //15
+                self?.task = nil
+                self?.lastCode = nil
             }
         }
-        self.task = task //16
-        task.resume() //17
+        self.task = task
+        task.resume() 
     }
     
     

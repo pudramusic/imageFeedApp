@@ -45,21 +45,16 @@ final class ProfileService {
             return
         }
         
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                if let error {
-                    completion(.failure(error))
-                }
-                return
-            }
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                do {
-                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+                switch result {
+                case .success(let profileResult):
                     let person = Profile(result: profileResult)
                     completion(.success(person))
                     self.profile = person
                     self.task = nil
-                } catch {
+                case .failure(let error):
                     completion(.failure(error))
                     self.lastCode = nil
                 }
