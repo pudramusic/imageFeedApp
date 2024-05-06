@@ -48,17 +48,13 @@ final class ProfileImageService {
         task?.cancel()
         lastUserName = username
         
-        let request = makeProfileImageRequest(username: username)
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                if let error {
-                    completion(.failure(error))
-                }
-                return
-            }
+        let requestProfileImage = makeProfileImageRequest(username: username)
+        let task = urlSession.objectTask(for: requestProfileImage) { [weak self] (result: Result<UserResult, Error>) in
+            guard let self = self else { return }
+
             DispatchQueue.main.async {
-                do {
-                    let profileImageURL = try JSONDecoder().decode(UserResult.self, from: data)
+                switch result {
+                case.success(let profileImageURL):
                     let avatarURL = profileImageURL.profileImage.small
                     self.avatarURL = avatarURL
                     completion(.success(avatarURL))
@@ -66,7 +62,7 @@ final class ProfileImageService {
                                                     object: self,
                                                     userInfo: ["URL": profileImageURL])
                     self.task = nil
-                } catch {
+                case .failure(let error):
                     completion(.failure(error))
                     self.lastUserName = nil
                 }
