@@ -37,9 +37,11 @@ class AuthViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Private extension
 
 private extension AuthViewController {
+    
+    // MARK: - Configuration function
     
     func configureAuthImageView() {
         authImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,12 +87,17 @@ private extension AuthViewController {
         navigationItem.backBarButtonItem?.tintColor = UIColor.ypBlack
     }
     
+    // MARK: - Function
+    
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
         webViewVewController.delegate = self
         navigationController?.pushViewController(webViewVewController, animated: true)
     }
+    
 }
+
+// MARK: - Extension
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
@@ -101,3 +108,20 @@ extension AuthViewController: WebViewViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+
+//extension AuthViewController {
+//    func showAlert(message: String) {
+//        let alert = UIAlertController(
+//            title: "Что-то пошло не так(",
+//            message: "Не удалось войти в систему",
+//            preferredStyle: .alert)
+//        let action = UIAlertAction(
+//            title: "ОК",
+//            style: .default) { _ in
+//                alert.dismiss(animated: true)
+//            }
+//        alert.addAction(action)
+//
+//    }
+//}
+

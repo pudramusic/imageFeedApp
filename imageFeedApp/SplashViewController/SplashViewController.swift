@@ -15,6 +15,7 @@ class SplashViewController: UIViewController {
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private let alert = AlertPresentor.shared
     
     // MARK: - Lifecycle
     
@@ -88,10 +89,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let accessToken):
                 self.storage.token = accessToken
-                // TODO: - закоминтить
-                self.fetchProfile(token: accessToken)
                 self.switchToTabBarVievController()
             case .failure(let error):
+                alert.showNetworkError(with: error)
                 break
             }
         }
@@ -109,16 +109,18 @@ extension SplashViewController: AuthViewControllerDelegate {
                     case .success(let avatarURL):
                         print(avatarURL)
                     case .failure(let failure):
+                        print(failure.localizedDescription)
                         break
                     }
                 }
                 self.switchToTabBarVievController()
             case .failure(let failure):
                 print(failure.localizedDescription)
-                // TODO [Sprint 11] Покажите ошибку получения профиля
                 break
             }
         }
     }
+    
+
     
 }

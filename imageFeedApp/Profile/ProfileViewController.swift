@@ -1,5 +1,6 @@
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
@@ -141,6 +142,17 @@ extension ProfileViewController {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL) else { return }
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 35)
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url,
+        placeholder: UIImage(named: "placeholder.jpeg"),
+                                    options: [.processor(processor)])
+        
     }
     
     func profileImageServiceObserve() {
