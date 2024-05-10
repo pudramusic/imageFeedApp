@@ -56,7 +56,7 @@ extension ProfileViewController {
     
     func configureAvatarImageView() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.image = UIImage(named: "avatar") ?? UIImage(systemName: "person.crop.circle.fill")
+        avatarImageView.image = UIImage(named: "") ?? UIImage(systemName: "person.crop.circle.fill")
         avatarImageView.tintColor = .ypGray
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
         avatarImageView.clipsToBounds = true
@@ -150,7 +150,7 @@ extension ProfileViewController {
         let processor = RoundCornerImageProcessor(cornerRadius: 35)
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url,
-        placeholder: UIImage(named: "placeholder.jpeg"),
+                                    placeholder: UIImage(named: "placeholder.jpeg"),
                                     options: [.processor(processor)])
         
     }
