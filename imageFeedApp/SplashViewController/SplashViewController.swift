@@ -6,7 +6,7 @@ class SplashViewController: UIViewController {
     
     // MARK: - View
     
-    private let splashView = UIImageView()
+    private let splashImageView = UIImageView()
     
     // MARK: - Properties
     
@@ -21,6 +21,7 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setupLayer()
         if let token = storage.token {
             fetchProfile(token: token)
         } else {
@@ -30,6 +31,7 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .ypBlack
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -53,6 +55,33 @@ class SplashViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+}
+
+// MARK: - Configuration extension
+
+extension SplashViewController {
+    
+    func setupLayer() {
+        view.backgroundColor = .ypBlack
+        configurationSplashView()
+    }
+    
+    func configurationSplashView() {
+        splashImageView.translatesAutoresizingMaskIntoConstraints = false
+        splashImageView.image = UIImage(named: "VectorLaunchScreen")
+        view.addSubview(splashImageView)
+        
+        NSLayoutConstraint.activate([
+            splashImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            splashImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            splashImageView.widthAnchor.constraint(equalToConstant: 75),
+            splashImageView.heightAnchor.constraint(equalToConstant: 78)
+        ])
+        
+        
+        
+    }
+    
 }
 
 // MARK: - Extension
@@ -118,6 +147,6 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-
+    
     
 }

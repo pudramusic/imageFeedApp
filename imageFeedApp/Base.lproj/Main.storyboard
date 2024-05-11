@@ -13,7 +13,7 @@
         <!--Image List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Image List" id="BYZ-38-t0r" customClass="ImageListViewController" customModule="imageFeedApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagesListViewController" title="Image List" id="BYZ-38-t0r" customClass="ImageListViewController" customModule="imageFeedApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,26 +165,10 @@
             </objects>
             <point key="canvasLocation" x="1137" y="-1345"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="5BG-sN-CH6">
-            <objects>
-                <viewController id="B4Y-za-7dn" userLabel="Profile" customClass="ProfileViewController" customModule="imageFeedApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5iy-NN-2Po">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Ngl-za-e00"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="profileActive" id="07R-0l-JpK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JgR-jG-0pM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-416.03053435114504" y="-679.57746478873241"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="L1l-2F-dAp">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="OCl-r0-dbe" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="OCl-r0-dbe" customClass="TabBarController" customModule="imageFeedApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OP1-mv-U9S">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -192,10 +176,6 @@
                         <color key="barTintColor" name="YP Background"/>
                         <color key="selectedImageTintColor" name="YP White"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="5uO-dB-TkY" kind="relationship" relationship="viewControllers" id="ODY-83-7HV"/>
-                        <segue destination="B4Y-za-7dn" kind="relationship" relationship="viewControllers" id="Rjw-l5-P1l"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHa-D1-Ro6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -301,7 +281,6 @@
         <image name="active" width="42" height="42"/>
         <image name="backward" width="24" height="24"/>
         <image name="mainActive" width="30" height="30"/>
-        <image name="profileActive" width="30" height="30"/>
         <image name="shareButton" width="51" height="51"/>
         <namedColor name="YP Background">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>

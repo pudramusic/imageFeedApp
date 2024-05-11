@@ -11,6 +11,7 @@
 		D908C92A2BEBAE0F00EE21E2 /* AlertPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908C9292BEBAE0F00EE21E2 /* AlertPresentor.swift */; };
 		D908C92D2BED245F00EE21E2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D908C92C2BED245F00EE21E2 /* Kingfisher */; };
 		D908C9302BEE123F00EE21E2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D908C92F2BEE123F00EE21E2 /* SwiftKeychainWrapper */; };
+		D908C9332BEF5F2200EE21E2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908C9322BEF5F2200EE21E2 /* TabBarController.swift */; };
 		D914044E2B9F15CB006C49AF /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914044D2B9F15CB006C49AF /* ImagesListCell.swift */; };
 		D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890A2BBFE0E800632180 /* AuthViewController.swift */; };
 		D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925890D2BC032C900632180 /* WebViewViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		D906FE992BA83FED007A8C5A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D908C9292BEBAE0F00EE21E2 /* AlertPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentor.swift; sourceTree = "<group>"; };
+		D908C9322BEF5F2200EE21E2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D914044D2B9F15CB006C49AF /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		D925890A2BBFE0E800632180 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		D925890D2BC032C900632180 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 				D908C9292BEBAE0F00EE21E2 /* AlertPresentor.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		D908C9312BEF5ED100EE21E2 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				D908C9322BEF5F2200EE21E2 /* TabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		D914044F2B9F1627006C49AF /* ImagesList */ = {
@@ -197,6 +207,7 @@
 				D906FE9B2BA86421007A8C5A /* Profile */,
 				D914044F2B9F1627006C49AF /* ImagesList */,
 				D98BEEE22BAEB32F008297D2 /* SingleImageViewController */,
+				D908C9312BEF5ED100EE21E2 /* TabBarController */,
 				D908C9282BEBADEA00EE21E2 /* Presentation */,
 				D98999A72B91C5750081341A /* Main.storyboard */,
 				D98999AF2B91C5780081341A /* LaunchScreen.storyboard */,
@@ -317,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F351C32BD7E77300ED8633 /* Profile.swift in Sources */,
+				D908C9332BEF5F2200EE21E2 /* TabBarController.swift in Sources */,
 				D925890E2BC032C900632180 /* WebViewViewController.swift in Sources */,
 				D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */,
 				D930C7CE2BC8446600F68BC3 /* OAuth2Service.swift in Sources */,
