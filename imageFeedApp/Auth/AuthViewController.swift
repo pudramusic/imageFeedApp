@@ -92,7 +92,8 @@ private extension AuthViewController {
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
         webViewVewController.delegate = self
-        navigationController?.pushViewController(webViewVewController, animated: true)
+        webViewVewController.modalPresentationStyle = .fullScreen
+        self.present(webViewVewController, animated: true, completion: nil)
     }
     
 }
@@ -108,20 +109,4 @@ extension AuthViewController: WebViewViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
-
-//extension AuthViewController {
-//    func showAlert(message: String) {
-//        let alert = UIAlertController(
-//            title: "Что-то пошло не так(",
-//            message: "Не удалось войти в систему",
-//            preferredStyle: .alert)
-//        let action = UIAlertAction(
-//            title: "ОК",
-//            style: .default) { _ in
-//                alert.dismiss(animated: true)
-//            }
-//        alert.addAction(action)
-//
-//    }
-//}
 

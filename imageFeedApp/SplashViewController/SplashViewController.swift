@@ -25,7 +25,7 @@ class SplashViewController: UIViewController {
         if let token = storage.token {
             fetchProfile(token: token)
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            segueToAuthView()
         }
     }
     
@@ -41,20 +41,20 @@ class SplashViewController: UIViewController {
         .lightContent
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-                return
-            }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == showAuthenticationScreenSegueIdentifier {
+    //            guard
+    //                let navigationController = segue.destination as? UINavigationController,
+    //                let viewController = navigationController.viewControllers[0] as? AuthViewController
+    //            else {
+    //                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
+    //                return
+    //            }
+    //            viewController.delegate = self
+    //        } else {
+    //            super.prepare(for: segue, sender: sender)
+    //        }
+    //    }
 }
 
 // MARK: - Configuration extension
@@ -77,11 +77,7 @@ extension SplashViewController {
             splashImageView.widthAnchor.constraint(equalToConstant: 75),
             splashImageView.heightAnchor.constraint(equalToConstant: 78)
         ])
-        
-        
-        
     }
-    
 }
 
 // MARK: - Extension
@@ -95,6 +91,13 @@ private extension SplashViewController {
         }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController  = tabBarController
+    }
+    
+    func segueToAuthView() {
+        let authViewController = AuthViewController()
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        self.present(authViewController, animated: true, completion: nil)
     }
 }
 
