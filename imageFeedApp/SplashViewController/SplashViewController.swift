@@ -77,19 +77,18 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        guard let token = storage.token else { return }
-        fetchProfile(token: token)
     }
     
     private func fetchOAuthToken(_ code: String) {
         UIBlockingProgressHUD.show()
         oAuth2Service.fetchOAuthToken(for: code) { [weak self] result in
             guard let self = self else { return }
-            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let accessToken):
                 self.storage.token = accessToken
-                self.switchToTabBarVievController()
+                guard let token = storage.token else { return }
+                fetchProfile(token: token)
+                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
                 alert.showNetworkError(with: error)
                 break
@@ -98,9 +97,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     private func fetchProfile(token: String) {
-        UIBlockingProgressHUD.show()
         profileService.fetchProfile(token) { [weak self] result in
-            UIBlockingProgressHUD.dismiss()
             guard let self = self else { return }
             switch result {
             case .success(let profile):
