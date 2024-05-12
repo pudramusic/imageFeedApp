@@ -1,5 +1,6 @@
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
@@ -7,13 +8,16 @@ class ProfileViewController: UIViewController {
     
     private let avatarImageView = UIImageView()
     private let logoutButton = UIButton()
-    private let nameLabel = UILabel()
-    private let loginNameLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private var nameLabel = UILabel()
+    private var loginNameLabel = UILabel()
+    private var descriptionLabel = UILabel()
     
     // MARK: - Properties
     
-    private var oAuth2TokenStorage = OAuth2TokenStorage.shared
+    private var storage = OAuth2TokenStorage.shared
+    private var profileService = ProfileService.shared
+    var profile: Profile?
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     // MARK: - Lifecycle
     
@@ -26,7 +30,7 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        OAuth2TokenStorage.shared.logout()
+        storage.logout()
         
     }
 }
@@ -35,7 +39,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController {
     
-    // MARK: - Function
+    // MARK: - Setup layer function
     
     func setupLayer() {
         view.backgroundColor = .ypBlack
@@ -44,11 +48,15 @@ extension ProfileViewController {
         configureNameLabel()
         configureLoginNameLabel()
         configureDescriptionLabel()
+        updateProfile(profile: profileService.profile)
+        profileImageServiceObserve()
     }
+    
+    // MARK: - Configuration function
     
     func configureAvatarImageView() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.image = UIImage(named: "avatar") ?? UIImage(systemName: "person.crop.circle.fill")
+        avatarImageView.image = UIImage(named: "") ?? UIImage(systemName: "person.crop.circle.fill")
         avatarImageView.tintColor = .ypGray
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
         avatarImageView.clipsToBounds = true
@@ -66,7 +74,7 @@ extension ProfileViewController {
     func  configureLogoutButton() {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.setImage(UIImage(named: "exit") ?? UIImage(systemName: "ipad.and.arrow.forward")!, for: .normal)
-        logoutButton.addTarget(self, 
+        logoutButton.addTarget(self,
                                action: #selector(Self.didTapLogoutButton),
                                for: .touchUpInside)
         logoutButton.tintColor = .ypRed
@@ -82,7 +90,7 @@ extension ProfileViewController {
     
     func configureNameLabel() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = ""
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         view.addSubview(nameLabel)
@@ -96,7 +104,7 @@ extension ProfileViewController {
     
     func configureLoginNameLabel() {
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.text = ""
         loginNameLabel.textColor = .ypGray
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(loginNameLabel)
@@ -111,7 +119,7 @@ extension ProfileViewController {
     func configureDescriptionLabel() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = "Hello, world!"
+        descriptionLabel.text = ""
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         view.addSubview(descriptionLabel)
@@ -122,6 +130,43 @@ extension ProfileViewController {
             descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8)
         ])
     }
+    
+    func updateProfile(profile: Profile?) {
+        guard let profile = profile else { return }
+        self.nameLabel.text = profile.name
+        self.loginNameLabel.text = profile.loginName
+        self.descriptionLabel.text = profile.bio
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL) else { return }
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 35)
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url,
+                                    placeholder: UIImage(named: "placeholder.jpeg"),
+                                    options: [.processor(processor)])
+        
+    }
+    
+    func profileImageServiceObserve() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
+    }
+    
 }
 
 

@@ -37,9 +37,11 @@ class AuthViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Private extension
 
 private extension AuthViewController {
+    
+    // MARK: - Configuration function
     
     func configureAuthImageView() {
         authImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,12 +87,18 @@ private extension AuthViewController {
         navigationItem.backBarButtonItem?.tintColor = UIColor.ypBlack
     }
     
+    // MARK: - Function
+    
     func segueToWebView() {
         let webViewVewController = WebViewViewController()
         webViewVewController.delegate = self
-        navigationController?.pushViewController(webViewVewController, animated: true)
+        webViewVewController.modalPresentationStyle = .fullScreen
+        self.present(webViewVewController, animated: true, completion: nil)
     }
+    
 }
+
+// MARK: - Extension
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
@@ -101,3 +109,4 @@ extension AuthViewController: WebViewViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+

@@ -13,6 +13,7 @@ final class WebViewViewController: UIViewController {
     // MARK: - Properties
     
     weak var delegate: WebViewViewControllerDelegate?
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
     // MARK: - Lifecycle
     
@@ -23,36 +24,46 @@ final class WebViewViewController: UIViewController {
         configureProgressIndicator()
         loadAuthView()
         webView.navigationDelegate = self
+        
+        estimatedProgressObservation = webView.observe(\.estimatedProgress,
+                                                        options: [],
+                                                        changeHandler: { [weak self] _, _ in
+            guard let self = self else { return }
+            self.updateProgressIndicator()
+        })
+        updateProgressIndicator()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        webView.addObserver(self, 
-                            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                            options: .new,
-                            context: nil)
-        updateProgressIndicator()
+        //        webView.addObserver(self,
+        //                            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+        //                            options: .new,
+        //                            context: nil)
+        //        updateProgressIndicator()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        webView.removeObserver(self, 
-                               forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                               context: nil)
+        //        webView.removeObserver(self,
+        //                               forKeyPath: #keyPath(WKWebView.estimatedProgress),
+        //                               context: nil)
     }
     
     // MARK: - Override
     
-    override func observeValue(forKeyPath keyPath: String?, 
-                               of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
-                               context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgressIndicator()
-        } else {
-           super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
+    //    override func observeValue(forKeyPath keyPath: String?,
+    //                               of object: Any?,
+    //                               change: [NSKeyValueChangeKey : Any]?,
+    //                               context: UnsafeMutableRawPointer?) {
+    //        if keyPath == #keyPath(WKWebView.estimatedProgress) {
+    //            updateProgressIndicator()
+    //        } else {
+    //           super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+    //        }
+    //    }
+    
     // MARK: - Action
     
     @objc
@@ -64,6 +75,8 @@ final class WebViewViewController: UIViewController {
 // MARK: - Extension
 
 private extension WebViewViewController {
+    
+    // MARK: - Configuration function
     
     func setupLayer() {
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,19 +97,19 @@ private extension WebViewViewController {
         progressIndicator.tintColor = UIColor.ypBackground
         
         webView.addSubview(progressIndicator)
-       
-            NSLayoutConstraint.activate([
-                progressIndicator.heightAnchor.constraint(equalToConstant: 4),
-                progressIndicator.leadingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.leadingAnchor),
-                progressIndicator.trailingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.trailingAnchor),
-                progressIndicator.topAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.topAnchor)
-               
-            ])
+        
+        NSLayoutConstraint.activate([
+            progressIndicator.heightAnchor.constraint(equalToConstant: 4),
+            progressIndicator.leadingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.leadingAnchor),
+            progressIndicator.trailingAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.trailingAnchor),
+            progressIndicator.topAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.topAnchor)
+            
+        ])
     }
     
-private func updateProgressIndicator() {
-    progressIndicator.progress = Float(webView.estimatedProgress)
-    progressIndicator.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    private func updateProgressIndicator() {
+        progressIndicator.progress = Float(webView.estimatedProgress)
+        progressIndicator.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
     func loadAuthView() {
@@ -121,7 +134,7 @@ private func updateProgressIndicator() {
 }
 
 extension WebViewViewController: WKNavigationDelegate { // проверка авторизации пользователя
-    func webView(_ webView: WKWebView, 
+    func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {

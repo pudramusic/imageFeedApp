@@ -7,3 +7,11 @@ enum NetworkError: Error {
     case urlRequestError(Error)
     case urlSessionError
 }
+
+enum AuthServiceError: Error {
+    case invalidRequest
+}
+
+enum ProfileServiceError: Error {
+    case invalidRequest
+}
