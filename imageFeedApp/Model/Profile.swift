@@ -1,19 +1,6 @@
 
 import UIKit
 
-struct ProfileResult: Codable {
-    enum CodingKeys: String, CodingKey {
-        case userName = "username"
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case bio = "bio"
-    }
-    let userName: String
-    let firstName: String?
-    let lastName: String?
-    let bio: String?
-}
-
 struct Profile {
     let userName: String
     let name: String
@@ -26,5 +13,7 @@ struct Profile {
         self.loginName = "@\(result.userName)"
         self.bio = result.bio
     }
-    
 }
+
+
+

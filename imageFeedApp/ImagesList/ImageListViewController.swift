@@ -9,6 +9,7 @@ final class ImageListViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var imagesListService = ImagesListService.shared
     private let photoName: [String] = Array(0..<20).map{ "\($0)"}
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
@@ -60,7 +61,7 @@ extension ImageListViewController: UITableViewDelegate {
             return 0
         }
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right // вычисляем ширину изображения
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let imageWidth = image.size.width
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
@@ -82,6 +83,14 @@ extension ImageListViewController: UITableViewDataSource {
         
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let photos = imagesListService.photos
+        if indexPath.row + 1 == photos.count {
+            imagesListService.fetchPhotosNextPage()
+        }
+
     }
 }
 

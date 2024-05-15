@@ -10,8 +10,8 @@ class AuthViewController: UIViewController {
     
     // MARK: Properties
     
-    private let oAuth2Service = OAuth2Service.shared
-    private let oAuth2TokenStorage = OAuth2TokenStorage()
+//    private let oAuth2Service = OAuth2Service.shared
+//    private let oAuth2TokenStorage = OAuth2TokenStorage()
     weak var delegate: AuthViewControllerDelegate?
     
     // MARK: - Lifecycle

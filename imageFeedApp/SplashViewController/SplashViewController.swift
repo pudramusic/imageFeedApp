@@ -40,21 +40,6 @@ class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-    
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-    //            guard
-    //                let navigationController = segue.destination as? UINavigationController,
-    //                let viewController = navigationController.viewControllers[0] as? AuthViewController
-    //            else {
-    //                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-    //                return
-    //            }
-    //            viewController.delegate = self
-    //        } else {
-    //            super.prepare(for: segue, sender: sender)
-    //        }
-    //    }
 }
 
 // MARK: - Configuration extension
@@ -90,7 +75,7 @@ private extension SplashViewController {
             return
         }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
-        window.rootViewController  = tabBarController
+        window.rootViewController = tabBarController
     }
     
     func segueToAuthView() {
