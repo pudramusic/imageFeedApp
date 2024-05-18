@@ -15,3 +15,7 @@ enum AuthServiceError: Error {
 enum ProfileServiceError: Error {
     case invalidRequest
 }
+
+enum ImageServiceError: Error {
+    case invalidRequest
+}

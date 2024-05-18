@@ -1,10 +1,3 @@
-//
-//  ImageListCell.swift
-//  imageFeedApp
-//
-//  Created by Yo on 11/3/24.
-//
-
 
 import UIKit
 

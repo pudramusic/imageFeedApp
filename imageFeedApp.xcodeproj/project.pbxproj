@@ -143,7 +143,6 @@
 		D930C7CC2BC843DC00F68BC3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D976F8372BF20AFE00A2392C /* Image */,
 				D930C7CF2BC9147900F68BC3 /* Networking */,
 				D930C7DC2BC98D1100F68BC3 /* Storage */,
 				D9F351BB2BD6E1C200ED8633 /* UIBlockingProgressHUD.swift */,
@@ -156,8 +155,9 @@
 			children = (
 				D9F351BD2BD7E11F00ED8633 /* Profile */,
 				D9F351BE2BD7E16300ED8633 /* Login */,
-				D930C7DD2BCA482C00F68BC3 /* URLSession+data.swift */,
+				D976F8372BF20AFE00A2392C /* Image */,
 				D930C7D22BC95E7400F68BC3 /* NetworkError.swift */,
+				D930C7DD2BCA482C00F68BC3 /* URLSession+data.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
