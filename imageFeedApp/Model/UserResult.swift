@@ -11,4 +11,6 @@ struct UserResult: Codable {
 
 struct ImageSize: Codable {
     let small: String
+    let medium: String
+    let large: String
 }
