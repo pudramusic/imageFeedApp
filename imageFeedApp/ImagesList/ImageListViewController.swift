@@ -1,16 +1,18 @@
 
 import UIKit
+import Kingfisher
 
 final class ImageListViewController: UIViewController {
     
-    // MARK: - Lifecycle
+    // MARK: - View
     
     @IBOutlet private var tableView: UITableView!
     
     // MARK: - Properties
     
     private var imagesListService = ImagesListService.shared
-    private let photoName: [String] = Array(0..<20).map{ "\($0)"}
+//    private let photoName: [String] = Array(0..<20).map{ "\($0)"}
+    private var photosList: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     private lazy var dateFormatter: DateFormatter = {
@@ -20,7 +22,7 @@ final class ImageListViewController: UIViewController {
         return formatter
     }()
     
-    // MARK: - Override
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         tableView.dataSource = self
@@ -51,12 +53,12 @@ final class ImageListViewController: UIViewController {
 
 extension ImageListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { // отвечает за действия после тапа по ячейке
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { //
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // 2
         guard let image = UIImage(named: photoName[indexPath.row]) else {
             return 0
         }
@@ -72,10 +74,10 @@ extension ImageListViewController: UITableViewDelegate {
 extension ImageListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photoName.count
+        return photosList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // 5
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
@@ -85,13 +87,27 @@ extension ImageListViewController: UITableViewDataSource {
         return imageListCell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) { // 1
         let photos = imagesListService.photos
         if indexPath.row + 1 == photos.count {
             imagesListService.fetchPhotosNextPage()
         }
-
     }
+    
+    func updateTableViewAnimated() {
+        let oldCount = photosList.count
+        let newCount = imagesListService.photos.count
+        photosList = imagesListService.photos
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPaths = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in }
+        }
+    }
+    
 }
 
 extension ImageListViewController {

@@ -7,7 +7,7 @@ final class ImagesListService {
     // MARK: - Properties
     
     static let shared = ImagesListService()
-    private (set) var photos: [Photo] = []
+    private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     private var task: URLSessionTask?
     static let didChangeNotification = Notification.Name(rawValue: "ImageListServiceDidChange")

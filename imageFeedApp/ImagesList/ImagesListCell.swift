@@ -1,9 +1,10 @@
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     
-    // MARK: - Lifecycle
+    // MARK: - View
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
@@ -15,14 +16,19 @@ final class ImagesListCell: UITableViewCell {
     let gradientLayer = CAGradientLayer()
     
     
-    // MARK: - Lifecycle
+    // MARK: - Override
+
+    override func prepareForReuse() {
+            super.prepareForReuse()
+            cellImage.kf.cancelDownloadTask()
+        }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         configureGradient()
     }
     
-    // MARK: - Private
+    // MARK: - Private function
     
     private func configureGradient() {
         
