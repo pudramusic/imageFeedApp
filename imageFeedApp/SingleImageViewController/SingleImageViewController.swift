@@ -25,6 +25,10 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet var backwardButton: UIButton!
     @IBOutlet var shareButton: UIButton!
     
+    // MARK: Properties
+    
+    var largeImageURL: URL!
+    
     // MARK: - Override
     
     override func viewDidLoad() {

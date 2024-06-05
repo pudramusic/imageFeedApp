@@ -11,7 +11,7 @@ final class ImageListViewController: UIViewController {
     // MARK: - Properties
     
     private var imagesListService = ImagesListService.shared
-//    private let photoName: [String] = Array(0..<20).map{ "\($0)"}
+    private var imagesListServiceObserver: NSObjectProtocol?
     private var photosList: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
@@ -29,6 +29,7 @@ final class ImageListViewController: UIViewController {
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         super.viewDidLoad()
+        imagesServiceObserve()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,8 +42,8 @@ final class ImageListViewController: UIViewController {
                 return
             }
             
-            let image = UIImage(named: photoName[indexPath.row])
-            viewController.image = image
+            let imageURL = URL(string: photosList[indexPath.row].largeImageURL)
+            viewController.largeImageURL = imageURL
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -58,10 +59,8 @@ extension ImageListViewController: UITableViewDelegate {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { // 2
-        guard let image = UIImage(named: photoName[indexPath.row]) else {
-            return 0
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let image = photosList[indexPath.row]
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let imageWidth = image.size.width
@@ -77,7 +76,7 @@ extension ImageListViewController: UITableViewDataSource {
         return photosList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // 5
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
@@ -87,7 +86,7 @@ extension ImageListViewController: UITableViewDataSource {
         return imageListCell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) { // 1
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let photos = imagesListService.photos
         if indexPath.row + 1 == photos.count {
             imagesListService.fetchPhotosNextPage()
@@ -112,10 +111,16 @@ extension ImageListViewController: UITableViewDataSource {
 
 extension ImageListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let image = UIImage(named: photoName[indexPath.row]) else {
-            return
+        guard let stubImage = UIImage(named: "scribbleVariable") else { return }
+        let imageUrl = photosList[indexPath.row].thumbImageURL
+        guard let url = URL(string: imageUrl) else { return }
+        
+        cell.cellImage.kf.indicatorType = .activity
+        cell.cellImage.kf.setImage(with: url, placeholder: stubImage) { [weak self] _ in
+            guard let self = self else { return }
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        cell.cellImage.image = image
+
         cell.cellImage.layer.cornerRadius = 16
         cell.cellImage.layer.masksToBounds = true
         
@@ -124,6 +129,18 @@ extension ImageListViewController {
         let isLiked = indexPath.row % 2 == 0 // проверяем нравится ли картинка.
         let likeImage = isLiked ? UIImage(named: "active") : UIImage(named: "noActive")
         cell.likeButton.setImage(likeImage, for: .normal)
+    }
+    
+    func imagesServiceObserve() {
+        imagesListServiceObserver = NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateTableViewAnimated()
+        }
+        imagesListService.fetchPhotosNextPage()
     }
 }
 
