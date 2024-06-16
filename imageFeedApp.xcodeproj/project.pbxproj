@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9050A492C1979BF00AA700E /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9050A482C1979BF00AA700E /* ImagesListCellDelegate.swift */; };
 		D906FE9A2BA83FED007A8C5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D906FE992BA83FED007A8C5A /* ProfileViewController.swift */; };
 		D908C92A2BEBAE0F00EE21E2 /* AlertPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908C9292BEBAE0F00EE21E2 /* AlertPresentor.swift */; };
 		D908C92D2BED245F00EE21E2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D908C92C2BED245F00EE21E2 /* Kingfisher */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D9050A482C1979BF00AA700E /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 		D906FE992BA83FED007A8C5A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D908C9292BEBAE0F00EE21E2 /* AlertPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentor.swift; sourceTree = "<group>"; };
 		D908C9322BEF5F2200EE21E2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				D914044D2B9F15CB006C49AF /* ImagesListCell.swift */,
+				D9050A482C1979BF00AA700E /* ImagesListCellDelegate.swift */,
 				D98999A52B91C5750081341A /* ImageListViewController.swift */,
 			);
 			path = ImagesList;
@@ -372,6 +375,7 @@
 				D930C7DB2BC9856B00F68BC3 /* OAuth2TokenStorageProtocol.swift in Sources */,
 				D930C7D92BC97FAC00F68BC3 /* OAuth2TokenStorage.swift in Sources */,
 				D976F8392BF20B1A00A2392C /* ImagesListService.swift in Sources */,
+				D9050A492C1979BF00AA700E /* ImagesListCellDelegate.swift in Sources */,
 				D930C7E22BCD5E6400F68BC3 /* AuthViewControllerDelegate.swift in Sources */,
 				D976F83D2BF339C600A2392C /* ProfileResult.swift in Sources */,
 				D925890B2BBFE0E800632180 /* AuthViewController.swift in Sources */,

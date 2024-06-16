@@ -14,7 +14,8 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     let gradientLayer = CAGradientLayer()
-    
+    let imagesListServise = ImagesListService.shared
+    weak var delegate: ImagesListCellDelegate?
     
     // MARK: - Override
 
@@ -49,4 +50,11 @@ final class ImagesListCell: UITableViewCell {
         dateLabel.layer.insertSublayer(gradientLayer, at: 0)
     
     }
+    
+    // MARK: - Action
+    
+    @IBAction func likeButtonClicked(_ sender: Any) {
+        delegate?.imageListCellDidTapLike(self)
+    }
+    
 }

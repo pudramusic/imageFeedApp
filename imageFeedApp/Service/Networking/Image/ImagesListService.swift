@@ -92,4 +92,56 @@ final class ImagesListService {
         }
         photos.append(contentsOf: newPhotos)
     }
+ 
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        guard let baseUrl = URL(string: Constants.defaultBaseURL) else {
+            preconditionFailure("Ошибка создания baseUrl")
+        }
+        
+        guard let url = URL(string: "/photos"
+                            + "?\(photoId)"
+                            + "&&like",
+                            relativeTo: baseUrl) else {
+            assertionFailure("Ошибка создания url")
+            return 
+        }
+        
+        assert(Thread.isMainThread)
+        guard let token = storage.token else {
+            return assertionFailure("Ошибка получения токена")
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = isLike ? "POST" : "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        print(request)
+//        return request
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<LikeResult, Error>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let likeResult):
+                // Поиск индекса элемента
+                if let index = self.photos.firstIndex(where: {$0.id == photoId}) {
+                    let photo = self.photos[index]
+                // Копия элемента с инвертированным значением isLiked
+                    let newPhoto = Photo(
+                        id: photo.id,
+                        size: photo.size,
+                        createdAt: photo.createdAt,
+                        welcomeDescription: photo.welcomeDescription,
+                        thumbImageURL: photo.thumbImageURL,
+                        largeImageURL: photo.largeImageURL,
+                        isLiked: !photo.isLiked)
+                // Заменяем элемент в массиве
+                    self.photos[index] = newPhoto
+                }
+                completion (.success(()))
+            case .failure(let error):
+                completion (.failure(error))
+            }
+        }
+        task.resume()
+    }
 }
