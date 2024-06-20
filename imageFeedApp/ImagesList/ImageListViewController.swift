@@ -14,6 +14,7 @@ final class ImageListViewController: UIViewController {
     private var imagesListServiceObserver: NSObjectProtocol?
     private var photosList: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
+    private let alert = AlertPresentor.shared
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -125,10 +126,6 @@ extension ImageListViewController {
         cell.cellImage.layer.masksToBounds = true
         
         cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let isLiked = indexPath.row % 2 == 0 // проверяем нравится ли картинка.
-        let likeImage = isLiked ? UIImage(named: "active") : UIImage(named: "noActive")
-        cell.likeButton.setImage(likeImage, for: .normal)
     }
     
     func imagesServiceObserve() {
@@ -145,7 +142,24 @@ extension ImageListViewController {
 }
 // TODO: - Sprint 12
 extension ImageListViewController: ImagesListCellDelegate {
+    
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
-        
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photosList[indexPath.row]
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                self.photosList = self.imagesListService.photos // синехронизируем массив картинок с сервисом
+                cell.setIsLiked(isLked: !photo.isLiked) // меняем индикацию
+            case .failure(let error):
+                print("Не удалось поставить лайк: \(error)")
+                alert.showNetworkError(errorMessage: "Не удалось поставить лайк")
+            }
+            UIBlockingProgressHUD.dismiss()
+        }
     }
+    
 }

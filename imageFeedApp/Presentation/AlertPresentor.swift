@@ -5,10 +5,10 @@ class AlertPresentor: UIViewController {
     
     static let shared = AlertPresentor()
     
-    func showNetworkError(with: Error) {
+    func showNetworkError(errorMessage: String) {
         let alert = UIAlertController(
             title: "Что-то пошло не так(",
-            message: "Не удалось войти в систему",
+            message: errorMessage,
             preferredStyle: .alert)
         let action = UIAlertAction(
             title: "ОК",
