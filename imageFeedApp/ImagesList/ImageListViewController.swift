@@ -125,7 +125,14 @@ extension ImageListViewController {
         cell.cellImage.layer.cornerRadius = 16
         cell.cellImage.layer.masksToBounds = true
         
-        cell.dateLabel.text = dateFormatter.string(from: Date())
+        cell.setIsLiked(isLiked: photosList[indexPath.row].isLiked)
+        let photo = photosList[indexPath.row]
+        if let photoCreatedAt = photo.createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: photoCreatedAt)
+        } else {
+            cell.dateLabel.text = ""
+        }
+      
     }
     
     func imagesServiceObserve() {
@@ -140,20 +147,20 @@ extension ImageListViewController {
         imagesListService.fetchPhotosNextPage()
     }
 }
-// TODO: - Sprint 12
+
 extension ImageListViewController: ImagesListCellDelegate {
     
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photosList[indexPath.row]
         UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] result in
+        imagesListService.changeLike(photoId: photo.id, isLiked: !photo.isLiked) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(_):
                 self.photosList = self.imagesListService.photos // синехронизируем массив картинок с сервисом
-                cell.setIsLiked(isLked: !photo.isLiked) // меняем индикацию
+                cell.setIsLiked(isLiked: !photo.isLiked) // меняем индикацию
             case .failure(let error):
                 print("Не удалось поставить лайк: \(error)")
                 alert.showNetworkError(errorMessage: "Не удалось поставить лайк")

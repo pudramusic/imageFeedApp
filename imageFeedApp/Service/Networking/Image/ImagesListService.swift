@@ -93,7 +93,7 @@ final class ImagesListService {
         photos.append(contentsOf: newPhotos)
     }
  
-    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         
         guard let baseUrl = URL(string: Constants.defaultBaseURL) else {
             preconditionFailure("Ошибка создания baseUrl")
@@ -113,7 +113,7 @@ final class ImagesListService {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = isLike ? "POST" : "DELETE"
+        request.httpMethod = isLiked ? "POST" : "DELETE"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         print(request)
 //        return request
