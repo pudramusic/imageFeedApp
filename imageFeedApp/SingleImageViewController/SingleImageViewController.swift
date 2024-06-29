@@ -1,11 +1,6 @@
-//
-//  SingleImageViewController.swift
-//  imageFeedApp
-//
-//  Created by Yo on 21/3/24.
-//
 
 import UIKit
+import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     var image: UIImage? {
@@ -28,6 +23,7 @@ final class SingleImageViewController: UIViewController {
     // MARK: Properties
     
     var largeImageURL: URL!
+    private let alert = AlertPresentor.shared
     
     // MARK: - Override
     
@@ -41,6 +37,7 @@ final class SingleImageViewController: UIViewController {
         imageView.frame.size = image!.size
         rescaleAndCenterImageInScrollView(image: image!)
         scrollView.zoomScale = scrollView.maximumZoomScale
+        showLargeImage()
         
     }
     
@@ -65,18 +62,18 @@ extension SingleImageViewController: UIScrollViewDelegate {
         imageView
     }
     
-    func rescaleAndCenterImageInScrollView(image: UIImage) { // метод масштабирования изображения под размер экрана
+    func rescaleAndCenterImageInScrollView(image: UIImage) { // масштабирование изображения под размер экрана
         let minZoomScale = scrollView.maximumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
         
         view.layoutIfNeeded() // обновляем размеры view
         
-        let visibleRectSize = scrollView.bounds.size // после обновления view получаем размеры видимой области
+        let visibleRectSize = scrollView.bounds.size // размеры видимой области
         let imageSize = image.size
-        let hScale = visibleRectSize.width / imageSize.width // изменяем размер картинки до границ экрана
-        let vScale = visibleRectSize.height / imageSize.height // изменяем размер картинки до границ экрана
+        let hScale = visibleRectSize.width / imageSize.width // размер картинки до границ экрана
+        let vScale = visibleRectSize.height / imageSize.height // размер картинки до границ экрана
         let theoreticalScale = min(hScale, vScale)
-        let scale = min(maxZoomScale, max(minZoomScale, theoreticalScale)) // определяем финальный масштаба
+        let scale = min(maxZoomScale, max(minZoomScale, theoreticalScale)) // финальный масштаб
         
         self.scrollView.setZoomScale(scale, animated: false) // устанавливаем финальный масштаб
         scrollView.layoutIfNeeded() // обновляем размеры subview
@@ -95,5 +92,40 @@ extension SingleImageViewController: UIScrollViewDelegate {
         let contentInsetY = max((boundSize.height - frameToCenter.size.height) * 0.5, 0)
         scrollView.contentInset = UIEdgeInsets(top: contentInsetY, left: contentInsetX, bottom: contentInsetY, right: contentInsetX) // устанавливаем внутренние отступы
         scrollView.contentInsetAdjustmentBehavior = .automatic // устанавливаем отскок содержимого внутри отступов
+    }
+    
+    func showLargeImage() {
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: largeImageURL) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let image):
+                self.rescaleAndCenterImageInScrollView(image: image.image)
+            case .failure:
+                self.showError()
+            }
+            UIBlockingProgressHUD.dismiss()
+        }
+    }
+    
+    func showError() {
+        let alert = UIAlertController(
+            title: "Что-то пошло не так",
+            message: "Попробовать еще раз?",
+            preferredStyle: .alert)
+        let dismissAction = UIAlertAction(
+            title: "Нет",
+            style: .default) { _ in
+                alert.dismiss(animated: true)
+            }
+        let retryAction = UIAlertAction(
+            title: "Да",
+            style: .default) { [weak self] _ in
+                guard let self = self else { return }
+                self.showLargeImage()
+            }
+        alert.addAction(dismissAction)
+        alert.addAction(retryAction)
+        self.present(alert, animated: true)
     }
 }

@@ -33,6 +33,8 @@ final class ImageListViewController: UIViewController {
         imagesServiceObserve()
     }
     
+    // MARK: - Override
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard

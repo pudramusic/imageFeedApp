@@ -107,7 +107,6 @@ extension SplashViewController: AuthViewControllerDelegate {
                 fetchProfile(token: token)
                 UIBlockingProgressHUD.dismiss()
             case .failure(let error):
-//                alert.showNetworkError(with: error)
                 alert.showNetworkError(errorMessage: "Не удалось войти в систему")
                 break
             }
